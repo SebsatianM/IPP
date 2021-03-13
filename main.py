@@ -54,23 +54,48 @@ Function that show options frame with setting to sorting visualization part of p
 def show_sorting_options():
     destroy_frame()
     ui_frame = Frame(root_frame,bg=c_dark_grey,width=500)
+
     Label(ui_frame,
         text="Wybierz algorytm:",
         foreground=c_black,  
-        background=c_grey,  
-    ).grid(row=2, column=0, padx=5, pady=5, sticky=W)
+        background=c_grey,
+        width= 15
+    ).grid(row=1, column=0, padx=5, pady=0, sticky=W)
+
+    ttk.Combobox(ui_frame,
+        foreground=c_black,  
+        background=c_grey,
+        values=['Bubble Sort',
+                'Selection Sort',
+                'Insertion Sort',
+                'Merge Sort',
+                'Heap Sort',
+                'Quick Sort'
+            ],
+        width=14
+    ).grid(row=2,column=0,padx=5)
 
     Label(ui_frame,
-        text="Ustaw prędkość:",
+        text="Ustaw prędkość(s):",
         foreground=c_black,  
-        background=c_grey).grid(row=3, column=0, padx=5, pady=5, sticky=W)
+        background=c_grey,
+        width=15).grid(row=3, column=0, padx=5, pady=(5,0), sticky=W)
+
+    Scale(ui_frame,
+        foreground=c_black,  
+        background=c_grey,
+        from_=float(0.0),
+        to=float(5.0),
+        orient = HORIZONTAL, 
+        resolution=0.01
         
+    ).grid(row=4, column=0, padx=5, pady=0, sticky=W)
     ui_frame.pack(fill="x")
+
 
 """
 Function that show options frame with setting to integrate visualization part of program
-"""
-   
+"""  
 def show_integration_options():
     destroy_frame()
     ui_frame = Frame(root_frame,bg=c_dark_grey)
