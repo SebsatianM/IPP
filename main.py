@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+import random
 
 #define colors palette
 c_black = "#0B0C10"
@@ -41,7 +42,6 @@ def show_main_bar():
 """
 Function for destroying conetent of ui_frame when frame already exists and user change option 
 """
-
 def destroy_frame():
     widget = root_frame.winfo_children()
     if len(widget)>1:
@@ -53,7 +53,7 @@ Function that show options frame with setting to sorting visualization part of p
 """
 
 def show_sorting_options():
-    global root_width
+    global type_combobox, speed_scale, size_scale, min_val_scale, max_val_scale
     f_col_pad_x= 5
     pad_y = 1
 
@@ -75,7 +75,9 @@ def show_sorting_options():
                 'Heap Sort',
                 'Quick Sort'
             ],
-        height=20,state="readonly").grid(row=1,column=0,padx=(5,f_col_pad_x), sticky="new")
+        height=20,state="readonly")
+
+    type_combobox.grid(row=1,column=0,padx=(5,f_col_pad_x), sticky="new")
 
     Label(ui_frame,
         text="Ustaw prędkość(s):",
@@ -88,7 +90,9 @@ def show_sorting_options():
         from_=float(0.0),
         to=float(5.0),
         orient = HORIZONTAL, 
-        resolution=0.01).grid(row=3, column=0, padx=(5,f_col_pad_x), pady=0, sticky="new")
+        resolution=0.01)
+
+    speed_scale.grid(row=3, column=0, padx=(5,f_col_pad_x), pady=0, sticky="new")
 
     Label(ui_frame,
         text="Rozmiar tablicy:",
@@ -101,8 +105,10 @@ def show_sorting_options():
         from_=0,
         to= 100,
         orient = HORIZONTAL, 
-        resolution=1).grid(row=1, column=1, padx=(5,f_col_pad_x), pady=0, sticky="new")    
-        
+        resolution=1)
+
+    size_scale.grid(row=1, column=1, padx=(5,f_col_pad_x), pady=0, sticky="new") 
+          
     Label(ui_frame,
         text="Minimalna warotść:",
         foreground=c_black,  
@@ -114,7 +120,9 @@ def show_sorting_options():
         from_= 0,
         to= 99,
         orient = HORIZONTAL, 
-        resolution=1).grid(row=1, column=2, padx=(5,f_col_pad_x), pady=0, sticky="nsew")       
+        resolution=1)       
+
+    min_val_scale.grid(row=1, column=2, padx=(5,f_col_pad_x), pady=0, sticky="nsew")
 
     Label(ui_frame,
         text="Maksymalna warotść:",
@@ -127,9 +135,11 @@ def show_sorting_options():
         from_= 0,
         to= 100,
         orient = HORIZONTAL, 
-        resolution=1).grid(row=1, column=3, padx=(5,f_col_pad_x), pady=0, sticky="nsew")        
+        resolution=1)
 
-    generate_button = Button(ui_frame,text="Generuj",bg =c_grey,fg=c_black,pady=1,width= 15,command=show_sorting_options)
+    max_val_scale.grid(row=1, column=3, padx=(5,f_col_pad_x), pady=0, sticky="nsew")        
+
+    generate_button = Button(ui_frame,text="Generuj",bg =c_grey,fg=c_black,pady=1,width= 15,command=generate)
     start_button = Button(ui_frame,text="Start",bg =c_grey,fg=c_black,pady=1,width= 15,command=show_sorting_options)
     
 
@@ -145,6 +155,32 @@ def show_sorting_options():
     
     ui_frame.pack(fill="x")
 
+def generate():
+    print('Wybrany algorymt ' + type_combobox.get())
+    try:
+        minVal = int(min_val_scale.get())
+    except:
+        minVal = 1
+    try:
+        maxVal = int(max_val_scale.get())
+    except:
+        maxVal = 10
+    try:
+        size = int(size_scale.get())
+    except:
+        size = 10
+
+    if minVal < 0 : minVal = 0
+    if maxVal > 100 : maxVal = 100
+    if size > 30 or size < 3: size = 25
+    if minVal > maxVal : minVal, maxVal = maxVal, minVal
+
+    data = []
+    for _ in range(size):
+        data.append(random.randrange(minVal, maxVal+1))
+
+    for x in range(len(data)):
+        print(data[x])
 
 """
 Function that show options frame with setting to integrate visualization part of program
