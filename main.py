@@ -74,7 +74,8 @@ def show_sorting_options():
                 'Merge Sort',
                 'Heap Sort',
                 'Quick Sort'
-            ],height=20).grid(row=1,column=0,padx=(5,f_col_pad_x), sticky="new")
+            ],
+        height=20,state="readonly").grid(row=1,column=0,padx=(5,f_col_pad_x), sticky="new")
 
     Label(ui_frame,
         text="Ustaw prędkość(s):",
@@ -169,6 +170,7 @@ def width_info(event):
     if root_width!=root.winfo_width():
         root_width=root.winfo_width()
 
+   
 if __name__ == "__main__":
     
     #creating main frame on main window analogue of main div in html
@@ -176,11 +178,6 @@ if __name__ == "__main__":
     root_frame.pack(fill="both",expand=True)   
     
     show_main_bar()
-
-    #root.bind( "<Configure>", width_info)
-    
-    
-
 
     
     root.mainloop()
