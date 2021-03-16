@@ -22,9 +22,9 @@ Celem mojego projektu jest stworzenie aplikacji do wizualizacji algorytmów sort
 
 - [x] 04.03-18.03 
     - [x] Stworzenie GUI
-        -stworzenie zakładki do wizualizacji danych
+        - stworzenie zakładki do wizualizacji danych
     - [x] Stworzenie losowania liczb 
-        -stworzenie generowania losowych liczb na podstawie ustawionych wartości w gui 
+        - stworzenie generowania losowych liczb na podstawie ustawionych wartości w gui 
 - [ ] 18.03-01.04 
     - [ ] Utworzenie fragmentu do pobierania danych od użytkownika,
     - [ ] Pokazywanie danych na wykresie,
