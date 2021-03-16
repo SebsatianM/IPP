@@ -12,9 +12,9 @@ c_turquoise = "#45A29E"
 root = Tk()
 root.title('Sorting Algorithms Visualizer')
 
-root.maxsize(900,600)
-root.minsize(500,400)
-
+root.maxsize(1200,1000)
+root.minsize(600,500)
+root_width = 500
 
 """
 Function that create upper frame with 3 buttons
@@ -28,10 +28,10 @@ def show_main_bar():
     i_btn = Button(btn_frame,text="Całkowanie",bg =c_grey,fg=c_black,pady=1, width= 1,command=show_integration_options)
     r_btn = Button(btn_frame,text="Miejsca zerowe",bg =c_grey,fg=c_black,pady=1,width= 5,command=show_sorting_options)
 
+    s_btn.grid(row=0,column=0,padx=10,pady=10,sticky="nsew")
     i_btn.grid(row=0,column=1,padx=10,pady=10,sticky="nsew")
     r_btn.grid(row=0,column=2,padx=10,pady=10,sticky="nsew")
-    s_btn.grid(row=0,column=0,padx=10,pady=10,sticky="nsew")
-
+    
     btn_frame.grid_columnconfigure(0,weight=1)
     btn_frame.grid_columnconfigure(1,weight=1)
     btn_frame.grid_columnconfigure(2,weight=1)
@@ -47,22 +47,25 @@ def destroy_frame():
     if len(widget)>1:
         widget[1].destroy()
 
+    
 """
 Function that show options frame with setting to sorting visualization part of program
 """
 
 def show_sorting_options():
+    global root_width
+    f_col_pad_x= 5
+    pad_y = 1
+
     destroy_frame()
-    ui_frame = Frame(root_frame,bg=c_dark_grey,width=500)
+    ui_frame = Frame(root_frame,bg=c_dark_grey)
 
     Label(ui_frame,
         text="Wybierz algorytm:",
         foreground=c_black,  
-        background=c_grey,
-        width= 15
-    ).grid(row=1, column=0, padx=5, pady=0, sticky=W)
+        background=c_grey).grid(row=0, column=0, padx=(5,f_col_pad_x), pady=0, sticky="sew")
 
-    ttk.Combobox(ui_frame,
+    type_combobox = ttk.Combobox(ui_frame,
         foreground=c_black,  
         background=c_grey,
         values=['Bubble Sort',
@@ -71,25 +74,74 @@ def show_sorting_options():
                 'Merge Sort',
                 'Heap Sort',
                 'Quick Sort'
-            ],
-        width=14
-    ).grid(row=2,column=0,padx=5)
+            ],height=20).grid(row=1,column=0,padx=(5,f_col_pad_x), sticky="new")
 
     Label(ui_frame,
         text="Ustaw prędkość(s):",
         foreground=c_black,  
-        background=c_grey,
-        width=15).grid(row=3, column=0, padx=5, pady=(5,0), sticky=W)
+        background=c_grey).grid(row=2, column=0, padx=(5,f_col_pad_x), pady=0, sticky="sew")
 
-    Scale(ui_frame,
+    speed_scale = Scale(ui_frame,
         foreground=c_black,  
         background=c_grey,
         from_=float(0.0),
         to=float(5.0),
         orient = HORIZONTAL, 
-        resolution=0.01
+        resolution=0.01).grid(row=3, column=0, padx=(5,f_col_pad_x), pady=0, sticky="new")
+
+    Label(ui_frame,
+        text="Rozmiar tablicy:",
+        foreground=c_black,  
+        background=c_grey).grid(row=0, column=1, padx=(5,f_col_pad_x), pady=(pad_y,0), sticky="sew")
+
+    size_scale = Scale(ui_frame,
+        foreground=c_black,  
+        background=c_grey,
+        from_=0,
+        to= 100,
+        orient = HORIZONTAL, 
+        resolution=1).grid(row=1, column=1, padx=(5,f_col_pad_x), pady=0, sticky="new")    
         
-    ).grid(row=4, column=0, padx=5, pady=0, sticky=W)
+    Label(ui_frame,
+        text="Minimalna warotść:",
+        foreground=c_black,  
+        background=c_grey).grid(row=0, column=2, padx=(5,f_col_pad_x), pady=(pad_y,0), sticky="nsew")
+
+    min_val_scale = Scale(ui_frame,
+        foreground=c_black,  
+        background=c_grey,
+        from_= 0,
+        to= 99,
+        orient = HORIZONTAL, 
+        resolution=1).grid(row=1, column=2, padx=(5,f_col_pad_x), pady=0, sticky="nsew")       
+
+    Label(ui_frame,
+        text="Maksymalna warotść:",
+        foreground=c_black,  
+        background=c_grey).grid(row=0, column=3, padx=(5,f_col_pad_x), pady=(pad_y,0), sticky="nsew")
+
+    max_val_scale = Scale(ui_frame,
+        foreground=c_black,  
+        background=c_grey,
+        from_= 0,
+        to= 100,
+        orient = HORIZONTAL, 
+        resolution=1).grid(row=1, column=3, padx=(5,f_col_pad_x), pady=0, sticky="nsew")        
+
+    generate_button = Button(ui_frame,text="Generuj",bg =c_grey,fg=c_black,pady=1,width= 15,command=show_sorting_options)
+    start_button = Button(ui_frame,text="Start",bg =c_grey,fg=c_black,pady=1,width= 15,command=show_sorting_options)
+    
+
+    generate_button.grid(row=3,column=1,columnspan=3, padx=(f_col_pad_x,0), pady=10, sticky="nsw")
+    start_button.grid(row=3,column=1,columnspan=3, padx=(0,f_col_pad_x+10), pady=10, sticky="nse")
+    
+
+    ui_frame.grid_columnconfigure(0,weight=1)
+    ui_frame.grid_columnconfigure(1,weight=1)
+    ui_frame.grid_columnconfigure(2,weight=1)
+    ui_frame.grid_columnconfigure(3,weight=1)
+
+    
     ui_frame.pack(fill="x")
 
 
@@ -111,6 +163,11 @@ def show_integration_options():
         
     ui_frame.pack(fill="x")
 
+def width_info(event):
+    root.update()
+    global root_width
+    if root_width!=root.winfo_width():
+        root_width=root.winfo_width()
 
 if __name__ == "__main__":
     
@@ -118,7 +175,13 @@ if __name__ == "__main__":
     root_frame=Frame(root,bg=c_black)
     root_frame.pack(fill="both",expand=True)   
     
-    show_main_bar() 
+    show_main_bar()
+
+    #root.bind( "<Configure>", width_info)
+    
+    
 
 
+    
     root.mainloop()
+    
