@@ -140,10 +140,12 @@ def show_sorting_options():
     max_val_scale.grid(row=1, column=3, padx=(5,f_col_pad_x), pady=0, sticky="nsew")        
 
     generate_button = Button(ui_frame,text="Generuj",bg =c_grey,fg=c_black,pady=1,width= 15,command=generate)
+    load_button = Button(ui_frame,text="Importuj dane",bg =c_grey,fg=c_black,pady=1,width= 15,command=imoprt_data)
     start_button = Button(ui_frame,text="Start",bg =c_grey,fg=c_black,pady=1,width= 15,command=show_sorting_options)
     
 
     generate_button.grid(row=3,column=1,columnspan=3, padx=(f_col_pad_x,0), pady=10, sticky="nsw")
+    load_button.grid(row=3,column=1,columnspan=3, padx=(10,10), pady=10, sticky="ns")
     start_button.grid(row=3,column=1,columnspan=3, padx=(0,f_col_pad_x+10), pady=10, sticky="nse")
     
 
@@ -154,6 +156,9 @@ def show_sorting_options():
 
     
     ui_frame.pack(fill="x")
+
+def imoprt_data():
+    print("brach")
 
 def generate():
     print('Wybrany algorymt ' + type_combobox.get())
