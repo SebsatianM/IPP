@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+import tkinter.filedialog as fd
 import random
 
 #define colors palette
@@ -158,7 +159,16 @@ def show_sorting_options():
     ui_frame.pack(fill="x")
 
 def imoprt_data():
-    print("brach")
+    tf = fd.askopenfilename(
+        initialdir="C:/dev/IPP", 
+        title="Open Text file", 
+        filetypes=(("Text Files", "*.txt"),)
+        )
+    f = open(tf,'r')
+    stuff = f.read()
+    for line in stuff:
+        print(line)
+
 
 def generate():
     print('Wybrany algorymt ' + type_combobox.get())
