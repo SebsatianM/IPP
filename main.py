@@ -159,15 +159,28 @@ def show_sorting_options():
     ui_frame.pack(fill="x")
 
 def imoprt_data():
+    data = []
     tf = fd.askopenfilename(
         initialdir="C:/dev/IPP", 
         title="Open Text file", 
         filetypes=(("Text Files", "*.txt"),)
         )
+
     f = open(tf,'r')
-    stuff = f.read()
-    for line in stuff:
-        print(line)
+    file_stuff= f.read()
+
+    data_instring=""
+    for line in file_stuff:
+        data_instring+=line.replace("\n"," ").replace(","," ").replace(";"," ")  #creating one string from all user inserted data and separate everythig with space if its not letter or digit
+
+    data = [int(number) for number in data_instring.split() if number.isdigit()]    #filtering string for find only digit inside and append it to list named data
+
+    """
+    data_to_low za małe liczby 
+    data_to_high za duże liczby
+    stworzyć animacje dla przedziału a resztę dokleić później przy zapisywaniu
+
+    """
 
 
 def generate():
