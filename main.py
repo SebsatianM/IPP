@@ -40,6 +40,7 @@ def show_main_bar():
 
     btn_frame.pack(fill="x")
 
+
 """
 Function for destroying conetent of ui_frame when frame already exists and user change option 
 """
@@ -54,9 +55,9 @@ Function that show options frame with setting to sorting visualization part of p
 """
 
 def show_sorting_options():
-    global type_combobox, speed_scale, size_scale, min_val_scale, max_val_scale
-    f_col_pad_x= 5
-    pad_y = 1
+
+    f_col_pad_x= 5  #setting up size of gaps between buttons and sliders horizontally 
+    pad_y = 1    #setting up size of gaps between buttons and sliders vertically 
 
     destroy_frame()
     ui_frame = Frame(root_frame,bg=c_dark_grey)
@@ -158,8 +159,10 @@ def show_sorting_options():
     
     ui_frame.pack(fill="x")
 
+"""
+Reading and filtering data from file 
+"""
 def imoprt_data():
-    data = []
     tf = fd.askopenfilename(
         initialdir="C:/dev/IPP", 
         title="Open Text file", 
@@ -170,17 +173,16 @@ def imoprt_data():
     file_stuff= f.read()
 
     data_instring=""
+
     for line in file_stuff:
         data_instring+=line.replace("\n"," ").replace(","," ").replace(";"," ")  #creating one string from all user inserted data and separate everythig with space if its not letter or digit
 
-    data = [int(number) for number in data_instring.split() if number.isdigit()]    #filtering string for find only digit inside and append it to list named data
+    data_all = [int(number) for number in data_instring.split() if number.lstrip('-').isdigit()]    #filtering string for find only digit inside and append it to list named data
 
-    """
-    data_to_low za małe liczby 
-    data_to_high za duże liczby
-    stworzyć animacje dla przedziału a resztę dokleić później przy zapisywaniu
+    data_to_low = [number for number in data_all if number < 1]
+    data = [number for number in data_all if number in range(1,100) ]
+    data_to_high = [number for number in data_all if number >= 100]
 
-    """
 
 
 def generate():
@@ -200,7 +202,7 @@ def generate():
 
     if minVal < 0 : minVal = 0
     if maxVal > 100 : maxVal = 100
-    if size > 30 or size < 3: size = 25
+    if size > 30 or size < 3: size = 30
     if minVal > maxVal : minVal, maxVal = maxVal, minVal
 
     data = []
