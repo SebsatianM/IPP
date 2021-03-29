@@ -26,7 +26,7 @@ Celem mojego projektu jest stworzenie aplikacji do wizualizacji algorytmów sort
     - [x] Stworzenie losowania liczb 
         - stworzenie generowania losowych liczb na podstawie ustawionych wartości w gui 
 - [ ] 18.03-01.04 
-    - [ ] Utworzenie fragmentu do pobierania danych od użytkownika,
+    - [x] Utworzenie fragmentu do pobierania danych od użytkownika,
     - [ ] Pokazywanie danych na wykresie,
     - [ ] Dokończenie fukcjonalności danych losowych,
 - [ ] 01.04-22.04
