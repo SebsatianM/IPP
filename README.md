@@ -25,10 +25,10 @@ Celem mojego projektu jest stworzenie aplikacji do wizualizacji algorytmów sort
         - stworzenie zakładki do wizualizacji danych
     - [x] Stworzenie losowania liczb 
         - stworzenie generowania losowych liczb na podstawie ustawionych wartości w gui 
-- [ ] 18.03-01.04 
+- [x] 18.03-01.04 
     - [x] Utworzenie fragmentu do pobierania danych od użytkownika,
-    - [ ] Pokazywanie danych na wykresie,
-    - [ ] Dokończenie fukcjonalności danych losowych,
+    - [x] Pokazywanie danych na wykresie,
+    - [x] Dokończenie fukcjonalności danych losowych,
 - [ ] 01.04-22.04
     - [ ] Impementacja przynajmniej 3 algorytmów,
     - [ ] Poprawienie błędów które będą się pojawiać,
