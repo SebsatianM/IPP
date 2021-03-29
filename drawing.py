@@ -1,12 +1,7 @@
 from tkinter import *
 from tkinter import ttk
+from colors import *
 import main
-#define colors palette
-c_black = "#0B0C10"
-c_dark_grey = "#1F2833"
-c_grey = "#C5C6C7"
-c_light_blue = "#66FCF1"
-c_turquoise = "#45A29E"
 
 #Mainwindows settings
 root = Tk()
@@ -50,12 +45,11 @@ def destroy_frame():
     if len(widget)>1:
         widget[1].destroy()
 
-
 """
 Function that show options frame with setting to sorting visualization part of program
 """
 def show_sorting_options():
-    global type_combobox,speed_scale,size_scale,min_val_scale,max_val_scale
+    global type_combobox,speed_scale,size_scale,min_val_scale,max_val_scale,canvas,ui_frame
     f_col_pad_x= 5  #setting up size of gaps between buttons and sliders horizontally 
     pad_y = 1    #setting up size of gaps between buttons and sliders vertically 
 
@@ -141,19 +135,22 @@ def show_sorting_options():
 
     max_val_scale.grid(row=1, column=3, padx=(5,f_col_pad_x), pady=0, sticky="nsew")        
 
-    generate_button = Button(ui_frame,text="Generuj",bg =c_grey,fg=c_black,pady=1,width= 15,command=main.generate)
+    generate_button = Button(ui_frame,text="Generuj",bg =c_grey,fg=c_black,pady=1,width= 15,command=main.generate_data)
     load_button = Button(ui_frame,text="Importuj dane",bg =c_grey,fg=c_black,pady=1,width= 15,command=main.imoprt_data)
     start_button = Button(ui_frame,text="Start",bg =c_grey,fg=c_black,pady=1,width= 15,command=show_sorting_options)
     
     generate_button.grid(row=3,column=1,columnspan=3, padx=(f_col_pad_x,0), pady=10, sticky="nsw")
     load_button.grid(row=3,column=1,columnspan=3, padx=(10,10), pady=10, sticky="ns")
     start_button.grid(row=3,column=1,columnspan=3, padx=(0,f_col_pad_x+10), pady=10, sticky="nse")
-    
+
     ui_frame.grid_columnconfigure(0,weight=1)
     ui_frame.grid_columnconfigure(1,weight=1)
     ui_frame.grid_columnconfigure(2,weight=1)
     ui_frame.grid_columnconfigure(3,weight=1)
-    
+
+    canvas = Canvas(ui_frame, width=800, height=400, bg=c_grey)
+    canvas.grid(row=4, column=0, padx=10, pady=5,columnspan=4,sticky="nwes")
+
     ui_frame.pack(fill="x")
 
 """

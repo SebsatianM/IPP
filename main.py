@@ -1,11 +1,9 @@
 from tkinter import *
 from tkinter import ttk
 import tkinter.filedialog as fd
+from colors import *
 import random
 import drawing
-
-
-
 
 """
 Reading and filtering data from file 
@@ -30,11 +28,29 @@ def imoprt_data():
     data_to_low = [number for number in data_all if number < 1] 
     data = [number for number in data_all if number in range(1,100) ]
     data_to_high = [number for number in data_all if number >= 100]
+    Draw_data(data,[c_light_blue for i in range(0,len(data))])
 
+def Draw_data(data, colorArray):
+    drawing.canvas.delete("all")
+    canvas_width = 800  #TODO add dependancy of how wide is window
+    canvas_height = 400 
+    x_width = canvas_width / (len(data) + 1)
+    offset = 4
+    spacing = 2
+    normalizedData = [i / max(data) for i in data]
+    for i, height in enumerate(normalizedData):
+        x0 = i * x_width + offset + spacing
+        y0 = canvas_height - height * 390
+        x1 = (i + 1) * x_width + offset
+        y1 = canvas_height
+        drawing.canvas.create_rectangle(x0, y0, x1, y1, fill=colorArray[i])
 
+    drawing.ui_frame.update_idletasks()
 
-def generate():
-    print('Wybrany algorymt ' + drawing.type_combobox.get())
+"""
+Generating random numbers depends on user choice
+"""
+def generate_data():
     try:
         minVal = int(drawing.min_val_scale.get())
     except:
@@ -51,25 +67,21 @@ def generate():
     if minVal < 0 : minVal = 0
     if maxVal < 10 : maxVal = 10
     if maxVal > 100 : maxVal = 100
-    if size > 30 or size < 3: size = 30
+    if size > 100 or size < 3: size = 80
     if minVal > maxVal : minVal, maxVal = maxVal, minVal
 
     data = []
     for _ in range(size):
         data.append(random.randrange(minVal, maxVal+1))
-
-    print(len(data))
-    for x in range(len(data)):
-        print(data[x])
-
-
-   
-if __name__ == "__main__":
     
+    Draw_data(data,[c_light_blue for i in range(0,len(data))])
+
+
+if __name__ == "__main__":
     #creating main frame on main window analogue of main div in html
     drawing.init()
-    drawing.show_main_bar()
 
+    drawing.show_main_bar()
     
     drawing.root.mainloop()
     
