@@ -99,7 +99,7 @@ def show_sorting_options():
         foreground=c_black,  
         background=c_grey,
         from_=0,
-        to= 50,
+        to= 80,
         orient = HORIZONTAL, 
         resolution=1)
 
