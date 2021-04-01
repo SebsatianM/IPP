@@ -4,7 +4,8 @@ import tkinter.filedialog as fd
 from colors import *
 import random
 import drawing
-
+width_stack = [800]
+height_stack = [400]
 
 #Reading and filtering data from file 
 def imoprt_data():
@@ -28,20 +29,32 @@ def imoprt_data():
     data = [number for number in data_all if number in range(1,100) ]
     data_to_high = [number for number in data_all if number >= 100]
     Draw_data(data,[c_light_blue for i in range(0,len(data))])
+    
 
-def Draw_data(data, colorArray):
+def get_width_and_height():
+    drawing.root.update()
+    print(drawing.root.winfo_width()-10,drawing.root.winfo_height())
+    return drawing.root.winfo_width()-14,drawing.root.winfo_height()-181
+
+def Draw_data(data, colorArray,alghoritm="",f_call_counter=[0]):
     drawing.canvas.delete("all")
-    canvas_width = 800
-    canvas_height = 400
-    x_width = canvas_width / (len(data) + 1)
+    f_call_counter[0]+=1 #mutable variable are evaluated only once
+    if f_call_counter[0] % 5 == 0:
+        width_stack.pop()
+        height_stack.pop()
+        width_pom,height_pom = get_width_and_height()
+        width_stack.append(width_pom)
+        height_stack.append(height_pom)
+    
+    x_width = width_stack[0] / (len(data) + 1)
     offset = 4
     spacing = 2
     normalizedData = [i / max(data) for i in data]
     for i, height in enumerate(normalizedData):
         x0 = i * x_width + offset + spacing
-        y0 = canvas_height - height * 390
+        y0 = height_stack[0] - height * (height_stack[0]-10)
         x1 = (i + 1) * x_width + offset
-        y1 = canvas_height
+        y1 = height_stack[0]
         drawing.canvas.create_rectangle(x0, y0, x1, y1, fill=colorArray[i])
 
     drawing.ui_frame.update_idletasks()
@@ -86,4 +99,5 @@ if __name__ == "__main__":
     drawing.show_main_bar()
     
     drawing.root.mainloop()
+
     
