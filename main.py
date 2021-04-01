@@ -5,9 +5,8 @@ from colors import *
 import random
 import drawing
 
-"""
-Reading and filtering data from file 
-"""
+
+#Reading and filtering data from file 
 def imoprt_data():
     tf = fd.askopenfilename(
         initialdir="C:/dev/IPP", 
@@ -32,8 +31,8 @@ def imoprt_data():
 
 def Draw_data(data, colorArray):
     drawing.canvas.delete("all")
-    canvas_width = 800  #TODO add dependancy of how wide is window
-    canvas_height = 400 
+    canvas_width = 800
+    canvas_height = 400
     x_width = canvas_width / (len(data) + 1)
     offset = 4
     spacing = 2
@@ -47,9 +46,7 @@ def Draw_data(data, colorArray):
 
     drawing.ui_frame.update_idletasks()
 
-"""
-Generating random numbers depends on user choice
-"""
+#Generating random numbers depends on user choice
 def generate_data():
     try:
         minVal = int(drawing.min_val_scale.get())
@@ -64,17 +61,22 @@ def generate_data():
     except:
         size = 10
 
-    if minVal < 0 : minVal = 0
-    if maxVal < 10 : maxVal = 10
-    if maxVal > 100 : maxVal = 100
-    if size > 100 or size < 3: size = 80
-    if minVal > maxVal : minVal, maxVal = maxVal, minVal
+    if minVal == 0 and maxVal ==0 and size == 0:
+        data = [i for i in range(0,101)] #creating list from 0 to 100
+        random.shuffle(data)    #shuffle that list
+        Draw_data(data,[c_light_blue for i in range(0,101)])
+    else:
+        if minVal < 0 : minVal = 0
+        if maxVal < 10 : maxVal = 10
+        if maxVal > 100 : maxVal = 100
+        if size > 100 or size < 3: size = 80
+        if minVal > maxVal : minVal, maxVal = maxVal, minVal
 
-    data = []
-    for _ in range(size):
-        data.append(random.randrange(minVal, maxVal+1))
-    
-    Draw_data(data,[c_light_blue for i in range(0,len(data))])
+        data = []
+        for _ in range(size):
+            data.append(random.randrange(minVal, maxVal+1))
+        
+        Draw_data(data,[c_light_blue for i in range(0,len(data))])
 
 
 if __name__ == "__main__":
