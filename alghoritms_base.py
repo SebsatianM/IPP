@@ -19,7 +19,11 @@ class Algorithm:
     def update(self,data,colorArray,swap1=None,swap2=None):
         main.Draw_data(self.data,colorArray)
         
-        
+    def check(self):
+        for i in range(len(self.data)-1):
+            if self.data[i] < self.data[i+1]:
+                main.Draw_data(self.data,[c_green if i >= x else c_light_blue for x in range(len(self.data))])
+        main.Draw_data(self.data,[c_green for x in range(len(self.data))])
         
 class bubble_sort(Algorithm):
     def __init__(self,name):
@@ -29,14 +33,30 @@ class bubble_sort(Algorithm):
         n = len(self.data)
         for i in range(n):
             for j in range(n-1-i):
-                #self.update(self.data,[c_turquoise if i == j or i==j+1 else c_light_blue for i in range(0,len(self.data))])
                 if self.data[j]>self.data[j+1]:
                     self.data[j],self.data[j+1] = self.data[j+1],self.data[j]
-        
-                    self.update(self.data,[c_turquoise if i == j else c_green if i==j+1 else c_light_blue for i in range(0,len(self.data))]) 
+                    self.update(self.data,[c_turquoise if x == j else c_green if x==j+1 else c_light_blue for x in range(n)]) 
                 else:
-                    self.update(self.data,[c_green if i == j else c_turquoise if i==j+1 else c_light_blue for i in range(0,len(self.data))])         
-                
+                    self.update(self.data,[c_green if x == j else c_turquoise if x==j+1 else c_light_blue for x in range(n)])         
+        self.check()
+class selection_sort(Algorithm):
+    def __init__(self,name):
+        super().__init__('Selection Sort')
+    def sorting(self):
+        n = len(self.data)
+        for i in range(n):
+            min_val_idx = i
+            for j in range(i+1,n):  
+                if self.data[min_val_idx]>self.data[j]:
+                    self.update(self.data,[c_turquoise  if x == i else c_green if x==j else c_light_blue for x in range(n)])
+                    min_val_idx = j
+                else:
+                    self.update(self.data,[c_green if x == i else c_turquoise if x==j else c_light_blue for x in range(n)])
+            
+            self.data[i],self.data[min_val_idx] = self.data[min_val_idx],self.data[i]
+        self.check()
+
+
 
 
    

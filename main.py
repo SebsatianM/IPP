@@ -24,7 +24,8 @@ alghoritms_dict = {'Bubble Sort':alghoritms_base.bubble_sort,
 
 """
 
-alghoritms_dict = {'Bubble Sort':alghoritms_base.bubble_sort('Bubble Sort')}
+alghoritms_dict = {'Bubble Sort':alghoritms_base.bubble_sort('Bubble Sort'),
+                    'Selection Sort':alghoritms_base.selection_sort('Selection Sort')}
 
 #Reading and filtering data from file 
 def imoprt_data():
@@ -70,8 +71,8 @@ def Draw_data(data, colorArray,f_call_counter=[0]):
         speed_stack.append(speed)
         width_stack.append(width_pom)
         height_stack.append(height_pom)
-
     time.sleep(speed_stack[0])
+
     drawing.canvas.delete("all")
     x_width = width_stack[0] / (len(data) + 1)
     offset = 4

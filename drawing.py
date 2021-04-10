@@ -71,9 +71,9 @@ def show_sorting_options():
         foreground=c_black,  
         background=c_grey,
         from_=float(0.0),
-        to=float(5.0),
+        to=float(1.0),
         orient = HORIZONTAL, 
-        resolution=0.01)
+        resolution=0.005)
 
     speed_scale.grid(row=3, column=0, padx=(5,f_col_pad_x), pady=0, sticky="new")
 
