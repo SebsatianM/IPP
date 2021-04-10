@@ -7,11 +7,8 @@ import main
 root = Tk()
 root.title('Sorting Algorithms Visualizer')
 
-root.maxsize(1200,1000)
+root.maxsize(1920,1080)
 root.minsize(600,500)
-root_width = 500
-
-
 #Function that create upper frame with 3 buttons
 def init():
     global root_frame
@@ -60,15 +57,9 @@ def show_sorting_options():
     type_combobox = ttk.Combobox(ui_frame,
         foreground=c_black,  
         background=c_grey,
-        values=['Bubble Sort',
-                'Selection Sort',
-                'Insertion Sort',
-                'Merge Sort',
-                'Heap Sort',
-                'Quick Sort'
-            ],
+        values=[x for x in list(main.alghoritms_dict.keys())],
         height=20,state="readonly")
-
+    type_combobox.current(0)
     type_combobox.grid(row=1,column=0,padx=(5,f_col_pad_x), sticky="new")
 
     Label(ui_frame,
@@ -80,9 +71,9 @@ def show_sorting_options():
         foreground=c_black,  
         background=c_grey,
         from_=float(0.0),
-        to=float(5.0),
+        to=float(1.0),
         orient = HORIZONTAL, 
-        resolution=0.01)
+        resolution=0.005)
 
     speed_scale.grid(row=3, column=0, padx=(5,f_col_pad_x), pady=0, sticky="new")
 
@@ -133,7 +124,7 @@ def show_sorting_options():
 
     generate_button = Button(ui_frame,text="Generuj",bg =c_grey,fg=c_black,pady=1,width= 15,command=main.generate_data)
     load_button = Button(ui_frame,text="Importuj dane",bg =c_grey,fg=c_black,pady=1,width= 15,command=main.imoprt_data)
-    start_button = Button(ui_frame,text="Start",bg =c_grey,fg=c_black,pady=1,width= 15,command=show_sorting_options)
+    start_button = Button(ui_frame,text="Start",bg =c_grey,fg=c_black,pady=1,width= 15,command=main.start)
     
     generate_button.grid(row=3,column=1,columnspan=3, padx=(f_col_pad_x,0), pady=10, sticky="nsw")
     load_button.grid(row=3,column=1,columnspan=3, padx=(10,10), pady=10, sticky="ns")
@@ -143,11 +134,12 @@ def show_sorting_options():
     ui_frame.grid_columnconfigure(1,weight=1)
     ui_frame.grid_columnconfigure(2,weight=1)
     ui_frame.grid_columnconfigure(3,weight=1)
+    ui_frame.grid_rowconfigure(4,weight= 1)
 
     canvas = Canvas(ui_frame, width=800, height=400, bg=c_grey)
-    canvas.grid(row=4, column=0, padx=5, pady=5,columnspan=4,sticky="nwes")
-
-    ui_frame.pack(fill="x")
+    canvas.grid(row=4, column=0, padx=5, pady=5,columnspan=4,sticky="news")
+    
+    ui_frame.pack(fill="both",expand=True)
 
 
 #Function that show options frame with setting to integrate visualization part of program
@@ -164,4 +156,4 @@ def show_integration_options():
         foreground=c_black,  
         background=c_grey).grid(row=3, column=0, padx=5, pady=5, sticky=W)
         
-    ui_frame.pack(fill="x")
+    ui_frame.pack(fill="both")
