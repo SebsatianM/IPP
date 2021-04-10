@@ -5,12 +5,14 @@ from colors import *
 import random
 import drawing
 import alghoritms_base
+import time
 
 data = []
 data_to_low = []
 data_to_high = []
 width_stack = [800]
 height_stack = [400]
+speed_stack = [0.0]
 
 """
 alghoritms_dict = {'Bubble Sort':alghoritms_base.bubble_sort, 
@@ -55,17 +57,22 @@ def get_width_and_height():
     return drawing.root.winfo_width()-14,drawing.root.winfo_height()-181
 
 #Drawing data
-def Draw_data(data, colorArray,alghoritm="",f_call_counter=[0]):
-    drawing.canvas.delete("all")
+def Draw_data(data, colorArray,f_call_counter=[0]):
+    
     f_call_counter[0]+=1 #mutable variable are evaluated only once
 
     if f_call_counter[0] % 5 == 0:
         width_stack.pop()
         height_stack.pop()
+        speed_stack.pop()
         width_pom,height_pom = get_width_and_height()
+        speed = drawing.speed_scale.get()
+        speed_stack.append(speed)
         width_stack.append(width_pom)
         height_stack.append(height_pom)
-    
+
+    time.sleep(speed_stack[0])
+    drawing.canvas.delete("all")
     x_width = width_stack[0] / (len(data) + 1)
     offset = 4
     spacing = 2
@@ -76,10 +83,12 @@ def Draw_data(data, colorArray,alghoritm="",f_call_counter=[0]):
         x1 = (i + 1) * x_width + offset
         y1 = height_stack[0]
         drawing.canvas.create_rectangle(x0, y0, x1, y1, fill=colorArray[i])
+    drawing.canvas.update()
 
 #Generating random numbers depends on user choice
 def generate_data():
     global data
+    data.clear()
     try:
         minVal = int(drawing.min_val_scale.get())
     except:
@@ -119,8 +128,9 @@ def start():
     except:
         print("dupa") 
 
-    obj.alghoritm()
-    pass
+    obj.sorting()
+    
+    
 if __name__ == "__main__":
     #creating main frame on main window analogue of main div in html
     drawing.init()
