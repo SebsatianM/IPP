@@ -4,11 +4,30 @@ import tkinter.filedialog as fd
 from colors import *
 import random
 import drawing
+import alghoritms_base
+
+data = []
+data_to_low = []
+data_to_high = []
 width_stack = [800]
 height_stack = [400]
 
+"""
+alghoritms_dict = {'Bubble Sort':alghoritms_base.bubble_sort, 
+                'Selection Sort':selection_sort,  
+                'Insertion Sort':alghoritms_base,
+                'Merge Sort':alghoritms_base,
+                'Heap Sort':alghoritms_base,
+                'Quick Sort':alghoritms_base}
+
+"""
+
+alghoritms_dict = {'Bubble Sort':alghoritms_base.bubble_sort('Bubble Sort')}
+
 #Reading and filtering data from file 
 def imoprt_data():
+    global data,data_to_low,data_to_high
+
     tf = fd.askopenfilename(
         initialdir="C:/dev/IPP", 
         title="Open Text file", 
@@ -28,17 +47,18 @@ def imoprt_data():
     data_to_low = [number for number in data_all if number < 1] 
     data = [number for number in data_all if number in range(1,100) ]
     data_to_high = [number for number in data_all if number >= 100]
-    Draw_data(data,[c_light_blue for i in range(0,len(data))])
+    Draw_data(data,[c_light_blue for i in range(0,len(data)+1)])
     
-
+#Checking actual window width and height
 def get_width_and_height():
     drawing.root.update()
-    print(drawing.root.winfo_width()-10,drawing.root.winfo_height())
     return drawing.root.winfo_width()-14,drawing.root.winfo_height()-181
 
+#Drawing data
 def Draw_data(data, colorArray,alghoritm="",f_call_counter=[0]):
     drawing.canvas.delete("all")
     f_call_counter[0]+=1 #mutable variable are evaluated only once
+
     if f_call_counter[0] % 5 == 0:
         width_stack.pop()
         height_stack.pop()
@@ -57,10 +77,9 @@ def Draw_data(data, colorArray,alghoritm="",f_call_counter=[0]):
         y1 = height_stack[0]
         drawing.canvas.create_rectangle(x0, y0, x1, y1, fill=colorArray[i])
 
-    drawing.ui_frame.update_idletasks()
-
 #Generating random numbers depends on user choice
 def generate_data():
+    global data
     try:
         minVal = int(drawing.min_val_scale.get())
     except:
@@ -85,13 +104,23 @@ def generate_data():
         if size > 100 or size < 3: size = 80
         if minVal > maxVal : minVal, maxVal = maxVal, minVal
 
-        data = []
+
         for _ in range(size):
             data.append(random.randrange(minVal, maxVal+1))
         
         Draw_data(data,[c_light_blue for i in range(0,len(data))])
 
 
+def start():
+    alg_type = drawing.type_combobox.get()
+    obj = alghoritms_dict.get(alg_type)
+    try:
+        obj.add_data(data,data_to_low,data_to_high)
+    except:
+        print("dupa") 
+
+    obj.alghoritm()
+    pass
 if __name__ == "__main__":
     #creating main frame on main window analogue of main div in html
     drawing.init()
