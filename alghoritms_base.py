@@ -10,7 +10,7 @@ class Algorithm:
         self.data_to_low = data_to_low
         self.data_to_high = data_to_high
     
-    def print_values(self):
+    def print_values(self): 
         print(self.name)
         print(self.data)
         print(self.data_to_low)
@@ -59,12 +59,13 @@ class selection_sort(Algorithm):
             min_val_idx = i
             for j in range(i+1,n):  
                 if self.data[min_val_idx]>self.data[j]:
-                    self.update(self.data,[c_turquoise  if x == i else c_green if x==j else c_light_blue for x in range(n)])
+                    self.update([c_turquoise if x == i else c_green if x==j else c_light_blue for x in range(n)])
                     min_val_idx = j
                 else:
-                    self.update(self.data,[c_green if x == i else c_turquoise if x==j else c_light_blue for x in range(n)])
-            
+                    self.update([c_green if x == i else c_turquoise if x==j else c_light_blue for x in range(n)])
+
             self.data[i],self.data[min_val_idx] = self.data[min_val_idx],self.data[i]
+
         self.check()
 
 
@@ -86,13 +87,87 @@ class insertion_sort(Algorithm):
 
         self.check()
 
+class merge_sort(Algorithm):
+    def __init__(self,name):
+        super().__init__('Merge Sort')   
+
+    def sorting(self):
+        self.alg(0,len(self.data)-1)
+        self.check()
+
+    def alg(self,left,right):
+        if left < right:
+            center = (left+right)//2
+            self.alg(left,center)
+            self.alg(center+1,right)
+            self.merge(left, center ,right)
+
+    def merge(self,left,center,right):
+        self.update(self.get_clr(left,center,right))
+
+        left_part = self.data[left:center+1]
+        right_part = self.data[center+1:right+1]
+
+        l_idx = r_idx = 0
+        tmp1 = center-len(left_part)+1
+        tmp2 = center+len(right_part)
+        for x in range(min(len(left_part),len(right_part))):
+            
+            c_turquoise_list1 = [ind for ind in range(tmp1,tmp2+1) if ind != tmp1+x]
+            c_turquoise_list2= [ind for ind in range(tmp1,tmp2+1) if ind != tmp2-x]
+            self.update([c_turquoise if y in c_turquoise_list1 else c_red if y == tmp1+x else c_light_blue for y in range(len(self.data))])
+            self.update([c_turquoise if y in c_turquoise_list2 else c_red if y == tmp2-x else c_light_blue for y in range(len(self.data))])
+            
+        for idx in range(left,right+1):
+            
+            if l_idx < len(left_part) and r_idx < len(right_part):
+            
+                if left_part[l_idx]<= right_part[r_idx]:
+                    self.data[idx] = left_part[l_idx]
+                    l_idx+=1
+
+                else:
+                    self.data[idx] = right_part[r_idx]
+                    r_idx+=1
+
+                pom = self.data.index(self.data[idx])  
+                colorArray = self.get_clr(left,pom,right)
+                colorArray[idx] = c_orange
+                self.update(colorArray)
+                
+            elif l_idx < len(left_part):
+                self.data[idx] = left_part[l_idx]
+                l_idx+=1
+            else:
+                self.data[idx] = right_part[r_idx]
+                r_idx+=1
+                    
+
+        self.update([c_green if x>= left and x<= right else c_light_blue for x in range(len(self.data))])
         
+    def get_clr(self,left,center,right):
+        colorArray = []
+
+        for i in range(len(self.data)):
+            if i>= left and i<=right:
+                if i>= left and i<=center:
+                    colorArray.append(c_turquoise)
+                else:
+                    colorArray.append(c_turquoise)
+            else:
+                colorArray.append(c_light_blue)
+
+        return colorArray
+            
         
 
-                
 if __name__ == "__main__":
-    meh = bubble_sort("")
-    meh.add_data([1,3,4,5])
-    meh.alghoritm()
+
+    meh = merge_sort("")
+    meh.add_data([1,2,5,7,1,3,7,9,13,4,87,8,0,3,213,12])
+ 
+    meh.print_values()
+    meh.sorting()
+    meh.print_values()
 
 
