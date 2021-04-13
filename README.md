@@ -34,7 +34,8 @@ Celem mojego projektu jest stworzenie aplikacji do wizualizacji algorytmów sort
         - wizualizacja:
             - bubble sort,
             - selection sort,
-            - insertion sort
+            - insertion sort,
+            - merge sort
     - [ ] Poprawienie błędów które będą się pojawiać,
 - [ ] 22.04-13.05
     - [ ] Implementacja kolejnych algorytmów,
