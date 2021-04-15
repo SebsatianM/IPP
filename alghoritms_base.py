@@ -103,21 +103,24 @@ class merge_sort(Algorithm):
             self.merge(left, center ,right)
 
     def merge(self,left,center,right):
+
         self.update(self.get_clr(left,center,right))
 
         left_part = self.data[left:center+1]
         right_part = self.data[center+1:right+1]
 
         l_idx = r_idx = 0
-        tmp1 = center-len(left_part)+1
-        tmp2 = center+len(right_part)
-        for x in range(min(len(left_part),len(right_part))):
-            
-            c_turquoise_list1 = [ind for ind in range(tmp1,tmp2+1) if ind != tmp1+x]
-            c_turquoise_list2= [ind for ind in range(tmp1,tmp2+1) if ind != tmp2-x]
-            self.update([c_turquoise if y in c_turquoise_list1 else c_red if y == tmp1+x else c_light_blue for y in range(len(self.data))])
-            self.update([c_turquoise if y in c_turquoise_list2 else c_red if y == tmp2-x else c_light_blue for y in range(len(self.data))])
-            
+        
+        for_loop_range = len(left_part)+len(right_part)
+        
+        for x in range(for_loop_range//2):
+            left_red_square_idx = center - (len(left_part) - x)+1
+            right_part_red_square_idx = center+x+1
+            checking_values_indexes = [*range(center-len(left_part)+1,center+len(right_part)+1)]
+        
+            self.update([c_turquoise if y in checking_values_indexes and y != left_red_square_idx else c_red if y == left_red_square_idx else c_light_blue for y in range(len(self.data))])
+            self.update([c_turquoise if y in checking_values_indexes and y != right_part_red_square_idx else c_red if y == right_part_red_square_idx else c_light_blue for y in range(len(self.data))])
+         
         for idx in range(left,right+1):
             
             if l_idx < len(left_part) and r_idx < len(right_part):
@@ -142,7 +145,7 @@ class merge_sort(Algorithm):
                 self.data[idx] = right_part[r_idx]
                 r_idx+=1
                     
-
+        
         self.update([c_green if x>= left and x<= right else c_light_blue for x in range(len(self.data))])
         
     def get_clr(self,left,center,right):
@@ -159,7 +162,24 @@ class merge_sort(Algorithm):
 
         return colorArray
             
-        
+
+class heap_sort(Algorithm):
+    def __init_(self,name):
+        super().__init__('Heap Sort')
+
+    def sorting(self):
+        n = len(self.data)
+        for i in range(1,n):
+            key = self.data[i]
+            idx = i
+            self.update([c_turquoise if x == i-1 or x==i else c_orange if x==idx else c_light_blue for x in range(n)])
+            while self.data[i-1] > key and i>0:
+                self.data[i],self.data[i-1] = self.data[i-1],self.data[i]
+                self.update([c_turquoise if x == i-1 or x==i else c_orange if x==idx else c_light_blue for x in range(n)])
+                i-=1
+         
+
+        self.check()        
 
 if __name__ == "__main__":
 
