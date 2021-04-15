@@ -110,18 +110,17 @@ class merge_sort(Algorithm):
         right_part = self.data[center+1:right+1]
 
         l_idx = r_idx = 0
-
-        tmp1 = center-len(left_part)+1
-        tmp2 = center+len(right_part)
-
-        for x in range(min(len(left_part),len(right_part))):
-            
-            c_turquoise_list1 = [ind for ind in range(tmp1,center) if ind != tmp1+x]
-            c_turquoise_list2= [ind for ind in range(center,tmp2+1) if ind != tmp2-x]
-
-            self.update([c_turquoise if y in c_turquoise_list1 else c_red if y == tmp1+x else c_light_blue for y in range(len(self.data))])
-            self.update([c_turquoise if y in c_turquoise_list2 else c_red if y == tmp2-x else c_light_blue for y in range(len(self.data))])
-            
+        
+        for_loop_range = len(left_part)+len(right_part)
+        
+        for x in range(for_loop_range//2):
+            left_red_square_idx = center - (len(left_part) - x)+1
+            right_part_red_square_idx = center+x+1
+            checking_values_indexes = [*range(center-len(left_part)+1,center+len(right_part)+1)]
+        
+            self.update([c_turquoise if y in checking_values_indexes and y != left_red_square_idx else c_red if y == left_red_square_idx else c_light_blue for y in range(len(self.data))])
+            self.update([c_turquoise if y in checking_values_indexes and y != right_part_red_square_idx else c_red if y == right_part_red_square_idx else c_light_blue for y in range(len(self.data))])
+         
         for idx in range(left,right+1):
             
             if l_idx < len(left_part) and r_idx < len(right_part):
@@ -146,7 +145,7 @@ class merge_sort(Algorithm):
                 self.data[idx] = right_part[r_idx]
                 r_idx+=1
                     
-
+        
         self.update([c_green if x>= left and x<= right else c_light_blue for x in range(len(self.data))])
         
     def get_clr(self,left,center,right):
