@@ -103,18 +103,22 @@ class merge_sort(Algorithm):
             self.merge(left, center ,right)
 
     def merge(self,left,center,right):
+
         self.update(self.get_clr(left,center,right))
 
         left_part = self.data[left:center+1]
         right_part = self.data[center+1:right+1]
 
         l_idx = r_idx = 0
+
         tmp1 = center-len(left_part)+1
         tmp2 = center+len(right_part)
+
         for x in range(min(len(left_part),len(right_part))):
             
-            c_turquoise_list1 = [ind for ind in range(tmp1,tmp2+1) if ind != tmp1+x]
-            c_turquoise_list2= [ind for ind in range(tmp1,tmp2+1) if ind != tmp2-x]
+            c_turquoise_list1 = [ind for ind in range(tmp1,center) if ind != tmp1+x]
+            c_turquoise_list2= [ind for ind in range(center,tmp2+1) if ind != tmp2-x]
+
             self.update([c_turquoise if y in c_turquoise_list1 else c_red if y == tmp1+x else c_light_blue for y in range(len(self.data))])
             self.update([c_turquoise if y in c_turquoise_list2 else c_red if y == tmp2-x else c_light_blue for y in range(len(self.data))])
             
@@ -159,7 +163,24 @@ class merge_sort(Algorithm):
 
         return colorArray
             
-        
+
+class heap_sort(Algorithm):
+    def __init_(self,name):
+        super().__init__('Heap Sort')
+
+    def sorting(self):
+        n = len(self.data)
+        for i in range(1,n):
+            key = self.data[i]
+            idx = i
+            self.update([c_turquoise if x == i-1 or x==i else c_orange if x==idx else c_light_blue for x in range(n)])
+            while self.data[i-1] > key and i>0:
+                self.data[i],self.data[i-1] = self.data[i-1],self.data[i]
+                self.update([c_turquoise if x == i-1 or x==i else c_orange if x==idx else c_light_blue for x in range(n)])
+                i-=1
+         
+
+        self.check()        
 
 if __name__ == "__main__":
 
