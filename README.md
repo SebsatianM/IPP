@@ -29,8 +29,14 @@ Celem mojego projektu jest stworzenie aplikacji do wizualizacji algorytmów sort
     - [x] Utworzenie fragmentu do pobierania danych od użytkownika,
     - [x] Pokazywanie danych na wykresie,
     - [x] Dokończenie fukcjonalności danych losowych,
-- [ ] 01.04-22.04
-    - [ ] Impementacja przynajmniej 3 algorytmów,
+- [x] 01.04-22.04
+    - [x] Impementacja przynajmniej 3 algorytmów,
+        - wizualizacja:
+            - bubble sort,
+            - selection sort,
+            - insertion sort,
+            - merge sort,
+            - heap sort (nie skończony)
     - [ ] Poprawienie błędów które będą się pojawiać,
 - [ ] 22.04-13.05
     - [ ] Implementacja kolejnych algorytmów,
