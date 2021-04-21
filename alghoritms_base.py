@@ -167,23 +167,35 @@ class heap_sort(Algorithm):
     def __init_(self,name):
         super().__init__('Heap Sort')
 
+    def heapify(self, n, i):
+        largest = i
+        left = 2 * i + 1
+        right = 2 * i + 2
+
+        if left < n and self.data[i] < self.data[left]:
+            largest = left
+        if right < n and self.data[largest] < self.data[right]:
+            largest = right
+        if largest != i:
+            
+            self.data[i], self.data[largest] = self.data[largest], self.data[i]
+            self.update([c_green if x >= self.data[right] else c_red if x== self.data[i] else c_orange if x==self.data[largest] else c_turquoise for x in range(len(self.data))])
+            self.heapify(n, largest)
+
     def sorting(self):
+
         n = len(self.data)
-        for i in range(1,n):
-            key = self.data[i]
-            idx = i
-            self.update([c_turquoise if x == i-1 or x==i else c_orange if x==idx else c_light_blue for x in range(n)])
-            while self.data[i-1] > key and i>0:
-                self.data[i],self.data[i-1] = self.data[i-1],self.data[i]
-                self.update([c_turquoise if x == i-1 or x==i else c_orange if x==idx else c_light_blue for x in range(n)])
-                i-=1
-         
+        for i in range(n,-1,-1):
+            self.heapify(n, i)
 
-        self.check()        
+        for i in range(n-1,0,-1):
+            self.data[i], self.data[0] = self.data[0], self.data[i]
+            self.heapify(i, 0)
 
+        self.check()
 if __name__ == "__main__":
 
-    meh = merge_sort("")
+    meh = heap_sort("")
     meh.add_data([1,2,5,7,1,3,7,9,13,4,87,8,0,3,213,12])
  
     meh.print_values()
