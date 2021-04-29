@@ -25,7 +25,8 @@ alghoritms_dict = {'Bubble Sort':alghoritms_base.bubble_sort('Bubble Sort'),
                     'Selection Sort':alghoritms_base.selection_sort('Selection Sort'),
                     'Insertion Sort':alghoritms_base.insertion_sort('Insertion Sort'),
                     'Merge Sort':alghoritms_base.merge_sort('Merge Sort'),
-                    'Heap Sort':alghoritms_base.heap_sort('Heap Sort'),}
+                    'Heap Sort':alghoritms_base.heap_sort('Heap Sort'),
+                    'Quick Sort':alghoritms_base.quick_sort('Quick Sort')}
 
 #Reading and filtering data from file 
 def imoprt_data():
