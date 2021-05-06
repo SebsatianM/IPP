@@ -36,7 +36,8 @@ Celem mojego projektu jest stworzenie aplikacji do wizualizacji algorytmów sort
             - selection sort,
             - insertion sort,
             - merge sort,
-            - heap sort (nie skończony)
+            - heap sort,
+            - quick sort
     - [x] Poprawienie błędów które będą się pojawiać,
 - [ ] 22.04-13.05
     - [ ] Implementacja kolejnych algorytmów,
