@@ -195,29 +195,39 @@ class heap_sort(Algorithm):
         self.check()
 
 
-class QuickSort(Algorithm):
-    def __init__(self):
-        super().__init__("QuickSort")
+class quick_sort(Algorithm):
+    def __init__(self,name):
+        super().__init__("Quick Sort")
 
-    def algorithm(self, data=[], start=0, end=0):
-        if data == []:
-            array = self.data
-            end = len(array) - 1
-        if start < end:
-            pivot = self.partition(array,start,end)
-            self.algorithm(array,start,pivot-1)
-            self.algorithm(array,pivot+1,end)
+    def sorting(self):
+        self.QuickSort(0,len(self.data)-1)
+        self.check()
 
-    def partition(self, array, start, end):
-        x = array[end]
-        i = start-1
-        for j in range(start, end+1, 1):
-            if array[j] <= x:
-                i += 1
-                if i < j:
-                    array[i], array[j] = array[j], array[i]
-                    self.update_display(array[i], array[j])
-        return i
+    def QuickSort(self,l,r):
+        if l>=r:
+            return
+        self.update([c_turquoise if x >=l and x <= r else c_light_blue for x in range(len(self.data))])
+        p = self.partition(l,r)
+
+        self.QuickSort(l,p-1)
+        self.QuickSort(p+1,r)
+        
+    def partition(self,l,r):
+        pivot = self.data[r]
+        i = l - 1
+        for j in range(l,r):
+            self.update([c_turquoise if x >= l and x <r else c_orange if x == r else c_red if x==j else c_light_blue for x in range(len(self.data))])
+            if self.data[j] < pivot:
+                i+=1
+                c_turquoise_list = [x for x in range(l,r) if x!=j and x!=i]
+                self.update([c_turquoise if x in c_turquoise_list else c_orange if x == r else c_red if x==j or x==i else c_light_blue for x in range(len(self.data))])
+                self.data[i],self.data[j] = self.data[j],self.data[i]
+                self.update([c_turquoise if x in c_turquoise_list else c_orange if x == r else c_red if x==j or x==i else c_light_blue for x in range(len(self.data))])
+
+        self.data[i+1],self.data[r] = self.data[r], self.data[i+1]
+        
+        return i+1
+        
 if __name__ == "__main__":
 
     meh = heap_sort("")
