@@ -167,30 +167,34 @@ class heap_sort(Algorithm):
     def __init_(self,name):
         super().__init__('Heap Sort')
 
-    def heapify(self, n, i):
+    def heapify(self, n, i,sorted_idx):
+
         largest = i
         left = 2 * i + 1
         right = 2 * i + 2
-
         if left < n and self.data[i] < self.data[left]:
             largest = left
         if right < n and self.data[largest] < self.data[right]:
             largest = right
         if largest != i:
-            
+
+            if self.data[-1] != max(self.data):
+                sorted_idx = len(self.data)+1
+
+            self.update([c_red if x == i else c_orange if x ==largest else c_green if x>= sorted_idx else c_turquoise for x in range(len(self.data))])
             self.data[i], self.data[largest] = self.data[largest], self.data[i]
-            self.update([c_green if x >= self.data[right] else c_red if x== self.data[i] else c_orange if x==self.data[largest] else c_turquoise for x in range(len(self.data))])
-            self.heapify(n, largest)
+            self.update([c_red if x == i else c_orange if x == largest else c_green if x>= sorted_idx else c_turquoise for x in range(len(self.data))])
+            self.heapify(n, largest,sorted_idx)
 
     def sorting(self):
-
         n = len(self.data)
         for i in range(n,-1,-1):
-            self.heapify(n, i)
+            self.heapify(n, i, i)
 
         for i in range(n-1,0,-1):
             self.data[i], self.data[0] = self.data[0], self.data[i]
-            self.heapify(i, 0)
+            self.heapify(i, 0, i)
+            self.update([c_green if x >= i else c_turquoise for x in range(len(self.data))])
 
         self.check()
 
