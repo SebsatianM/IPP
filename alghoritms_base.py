@@ -231,7 +231,114 @@ class quick_sort(Algorithm):
         self.data[i+1],self.data[r] = self.data[r], self.data[i+1]
         
         return i+1
+
+
+class tim_sort(Algorithm):
+    def __init__(self,name):
+        super().__init__("Tim Sort")
+
+        self.MIN_MERGE = 32
+ 
+    def calcMinRun(self):
+        """Returns the minimum length of a
+        run from 23 - 64 so that
+        the len(array)/minrun is less than or
+        equal to a power of 2.
+    
+        e.g. 1=>1, ..., 63=>63, 64=>32, 65=>33,
+        ..., 127=>64, 128=>32, ...
+        """
+        n = len(self.data)
+        r = 0
+        while n >= self.MIN_MERGE:
+            r |= n & 1
+            n >>= 1
+        return n + r
+ 
+
+    def sorting(self):
+        min_run = self.calcMinRun()
+        n = len(self.data)
+        for i in range(0,n,min_run):
+            self.insertion_sort_for_timsort(i,min((i+min_run-1),n-1))
         
+        size = min_run
+        while size < n:
+            for start in range(0,n,size*2):
+                mid = start+size -1
+                end = min((start+size*2 -1),(n-1))
+                merged_array = self.merge(
+                left=self.data[start:mid + 1],
+                right=self.data[mid + 1:end + 1])
+
+            # Finally, put the merged array back into
+            # your array
+            self.data[start:start + len(merged_array)] = merged_array
+            self.update([c_light_blue for x in range(len(self.data))])
+
+        # Each iteration should double the size of your arrays
+            size *= 2
+        
+
+    def insertion_sort_for_timsort(self,left=0,right=None):
+
+        if right is None:
+            right = len(self.data)-1
+        
+        for i in range(left+1,right+1):
+            key_item = self.data[i]
+            j = i-1
+
+            while j>= left and self.data[j]>key_item:
+                c_turquoise_list = [x for x in range(left,right) if x!=i and x!=j]
+                self.data[j+1] = self.data[j]
+
+                self.update([c_turquoise if x in c_turquoise_list else c_orange if x==i or x==j else c_light_blue for x in range(len(self.data))])
+                j-=1
+            self.data[j+1] = key_item
+        
+    def merge(self,left,right):
+        print("merge")
+            # If the first array is empty, then nothing needs
+        # to be merged, and you can return the second array as the result
+        if len(left) == 0:
+            return right
+
+        # If the second array is empty, then nothing needs
+        # to be merged, and you can return the first array as the result
+        if len(right) == 0:
+            return left
+
+        result = []
+        index_left = index_right = 0
+
+        # Now go through both arrays until all the elements
+        # make it into the resultant array
+        while len(result) < len(left) + len(right):
+           
+            # The elements need to be sorted to add them to the
+            # resultant array, so you need to decide whether to get
+            # the next element from the first or the second array
+            if left[index_left] <= right[index_right]:
+                result.append(left[index_left])
+                index_left += 1
+            else:
+                result.append(right[index_right])
+                index_right += 1
+
+            # If you reach the end of either array, then you can
+            # add the remaining elements from the other array to
+            # the result and break the loop
+            if index_right == len(right):
+                result += left[index_left:]
+                break
+
+            if index_left == len(left):
+                result += right[index_right:]
+                break
+        
+        return result
+
 if __name__ == "__main__":
 
     meh = heap_sort("")
