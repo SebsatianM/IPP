@@ -21,6 +21,7 @@ alghoritms_dict = {'Bubble Sort':alghoritms_base.bubble_sort('Bubble Sort'),
                     'Merge Sort':alghoritms_base.merge_sort('Merge Sort'),
                     'Heap Sort':alghoritms_base.heap_sort('Heap Sort'),
                     'Quick Sort':alghoritms_base.quick_sort('Quick Sort'),
+                    'Tim Sort':alghoritms_base.tim_sort('Tim Sort'),
                     }
 
 #Reading and filtering data from file 
@@ -100,9 +101,9 @@ def generate_data():
         size = 10
 
     if minVal == 0 and maxVal ==0 and size == 0:
-        data = [i for i in range(1,101)] #creating list from 0 to 100
+        data = [i for i in range(1,129)] #creating list from 0 to 100
         random.shuffle(data)    #shuffle that list
-        Draw_data(data,[c_light_blue for i in range(0,101)])
+        Draw_data(data,[c_light_blue for i in range(0,129)])
     else:
         if minVal < 0 : minVal = 0
         if maxVal < 10 : maxVal = 10

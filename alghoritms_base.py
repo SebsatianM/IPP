@@ -1,6 +1,7 @@
 import main
 import time
 from colors import *
+from random import shuffle
 class Algorithm:
     def __init__(self, name):
          self.name = name
@@ -231,12 +232,105 @@ class quick_sort(Algorithm):
         self.data[i+1],self.data[r] = self.data[r], self.data[i+1]
         
         return i+1
+
+
+class tim_sort(Algorithm):
+    def __init__(self,name):
+        super().__init__("Tim Sort")
+
+        self.MIN_MERGE = 32
+ 
+    def calcMinRun(self):
+        """Returns the minimum length of a
+        run from 23 - 64 so that
+        the len(array)/minrun is less than or
+        equal to a power of 2.
+    
+        e.g. 1=>1, ..., 63=>63, 64=>32, 65=>33,
+        ..., 127=>64, 128=>32, ...
+        """
+        n = len(self.data)
+        r = 0
+        while n >= self.MIN_MERGE:
+            r |= n & 1
+            n >>= 1
+        return n + r
         
+
+    def insertion_sort_for_timsort(self,left=0,right=None):
+
+        if right is None:
+            right = len(self.data)-1
+        
+        for i in range(left+1,right+1):
+            key_item = self.data[i]
+            j = i-1
+
+            while j>= left and self.data[j]>key_item:
+                c_turquoise_list = [x for x in range(left,right) if x!=i and x!=j]
+                self.data[j+1] = self.data[j]
+
+                self.update([c_turquoise if x in c_turquoise_list else c_orange if x==i or x==j else c_light_blue for x in range(len(self.data))])
+                j-=1
+            self.data[j+1] = key_item
+        
+    def tim_merge(self,left,right,first_left_idx,first_right_idx):
+
+        if len(left) == 0:
+            return right
+
+        if len(right) == 0:
+            return left
+        
+        result = []
+        index_left = index_right = 0
+        while len(result) < len(left) + len(right):
+
+            if left[index_left] <= right[index_right]:
+                result.append(left[index_left])
+                self.update([c_orange if x == first_left_idx+index_left else c_turquoise if x>=first_left_idx and x<=first_right_idx+len(left) else c_light_blue for x in range(len(self.data))])
+                index_left += 1
+                
+            else:
+                result.append(right[index_right])
+                self.update([c_orange if x == first_right_idx+index_right else c_turquoise if x>=first_left_idx and x<=first_right_idx+len(left) else c_light_blue for x in range(len(self.data))])
+                index_right += 1
+
+            if index_right == len(right):
+                result += left[index_left:]
+                break
+
+            if index_left == len(left):
+                result += right[index_right:]
+                break
+            
+        return result
+
+    def sorting(self):
+        min_run = self.calcMinRun()
+        n = len(self.data)
+        for i in range(0,n,min_run):
+            self.insertion_sort_for_timsort(i,min((i+min_run-1),n-1))
+        
+        size = min_run
+        while size <= n:
+            for start in range(0,n,size*2):
+                mid = start+size -1
+                end = min((start+size*2 -1),(n-1))
+                merged_array = self.tim_merge(left=self.data[start:mid + 1],right=self.data[mid + 1:end + 1],first_left_idx=start,first_right_idx=mid + 1)
+                self.data[start:start + len(merged_array)] = merged_array
+            
+        
+       
+            size *= 2
+        self.update([c_light_blue for x in range(len(self.data))])
 if __name__ == "__main__":
 
-    meh = heap_sort("")
-    meh.add_data([1,2,5,7,1,3,7,9,13,4,87,8,0,3,213,12])
- 
+    meh = tim_sort("")
+    data =[x for x in range(0,128)]
+    shuffle(data)
+    meh.add_data(data)
+    
     meh.print_values()
     meh.sorting()
     meh.print_values()
