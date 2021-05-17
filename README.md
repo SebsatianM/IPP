@@ -35,12 +35,16 @@ Celem mojego projektu jest stworzenie aplikacji do wizualizacji algorytmów sort
             - bubble sort,
             - selection sort,
             - insertion sort,
-            - merge sort,
-            - heap sort (nie skończony)
+
     - [x] Poprawienie błędów które będą się pojawiać,
-- [ ] 22.04-13.05
-    - [ ] Implementacja kolejnych algorytmów,
-    - [ ] Poprawienie błędów które będą się pojawiać,
+- [x] 22.04-13.05
+    - [x] Implementacja kolejnych algorytmów,
+        - wizualizacja:
+            - merge sort,
+            - heap sort,
+            - quick sort
+    - [x] Poprawienie błędów które będą się pojawiać,
+       
 - [ ] 13.05-03.06
     - [ ] Stworzenie dodatkowych wizualizacji jak całkowanie lub szykanie miejsc zerowych funkcji,  
     - [ ] Poprawienie błędów które będą się pojawiać,
