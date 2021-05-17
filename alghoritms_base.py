@@ -1,6 +1,7 @@
 import main
 import time
 from colors import *
+from random import shuffle
 class Algorithm:
     def __init__(self, name):
          self.name = name
@@ -254,30 +255,6 @@ class tim_sort(Algorithm):
             r |= n & 1
             n >>= 1
         return n + r
- 
-
-    def sorting(self):
-        min_run = self.calcMinRun()
-        n = len(self.data)
-        for i in range(0,n,min_run):
-            self.insertion_sort_for_timsort(i,min((i+min_run-1),n-1))
-        
-        size = min_run
-        while size < n:
-            for start in range(0,n,size*2):
-                mid = start+size -1
-                end = min((start+size*2 -1),(n-1))
-                merged_array = self.merge(
-                left=self.data[start:mid + 1],
-                right=self.data[mid + 1:end + 1])
-
-            # Finally, put the merged array back into
-            # your array
-            self.data[start:start + len(merged_array)] = merged_array
-            self.update([c_light_blue for x in range(len(self.data))])
-
-        # Each iteration should double the size of your arrays
-            size *= 2
         
 
     def insertion_sort_for_timsort(self,left=0,right=None):
@@ -297,38 +274,28 @@ class tim_sort(Algorithm):
                 j-=1
             self.data[j+1] = key_item
         
-    def merge(self,left,right):
-        print("merge")
-            # If the first array is empty, then nothing needs
-        # to be merged, and you can return the second array as the result
+    def tim_merge(self,left,right,first_left_idx,first_right_idx):
+
         if len(left) == 0:
             return right
 
-        # If the second array is empty, then nothing needs
-        # to be merged, and you can return the first array as the result
         if len(right) == 0:
             return left
-
+        
         result = []
         index_left = index_right = 0
-
-        # Now go through both arrays until all the elements
-        # make it into the resultant array
         while len(result) < len(left) + len(right):
-           
-            # The elements need to be sorted to add them to the
-            # resultant array, so you need to decide whether to get
-            # the next element from the first or the second array
+
             if left[index_left] <= right[index_right]:
                 result.append(left[index_left])
+                self.update([c_orange if x == first_left_idx+index_left else c_turquoise if x>=first_left_idx and x<=first_right_idx+len(left) else c_light_blue for x in range(len(self.data))])
                 index_left += 1
+                
             else:
                 result.append(right[index_right])
+                self.update([c_orange if x == first_right_idx+index_right else c_turquoise if x>=first_left_idx and x<=first_right_idx+len(left) else c_light_blue for x in range(len(self.data))])
                 index_right += 1
 
-            # If you reach the end of either array, then you can
-            # add the remaining elements from the other array to
-            # the result and break the loop
             if index_right == len(right):
                 result += left[index_left:]
                 break
@@ -336,14 +303,34 @@ class tim_sort(Algorithm):
             if index_left == len(left):
                 result += right[index_right:]
                 break
-        
+            
         return result
 
+    def sorting(self):
+        min_run = self.calcMinRun()
+        n = len(self.data)
+        for i in range(0,n,min_run):
+            self.insertion_sort_for_timsort(i,min((i+min_run-1),n-1))
+        
+        size = min_run
+        while size <= n:
+            for start in range(0,n,size*2):
+                mid = start+size -1
+                end = min((start+size*2 -1),(n-1))
+                merged_array = self.tim_merge(left=self.data[start:mid + 1],right=self.data[mid + 1:end + 1],first_left_idx=start,first_right_idx=mid + 1)
+                self.data[start:start + len(merged_array)] = merged_array
+            
+        
+       
+            size *= 2
+        self.update([c_light_blue for x in range(len(self.data))])
 if __name__ == "__main__":
 
-    meh = heap_sort("")
-    meh.add_data([1,2,5,7,1,3,7,9,13,4,87,8,0,3,213,12])
- 
+    meh = tim_sort("")
+    data =[x for x in range(0,128)]
+    shuffle(data)
+    meh.add_data(data)
+    
     meh.print_values()
     meh.sorting()
     meh.print_values()
