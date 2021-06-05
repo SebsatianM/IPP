@@ -317,36 +317,6 @@ class tim_sort(Algorithm):
             size *= 2
         self.update([c_light_blue for x in range(len(self.data))])
 
-class comb_sort(Algorithm):
-    def ___init__(self,name):
-        super().__init__(name)
-
-    def calcGap(self,gap):
-        gap = (gap * 10)//13
-        if gap < 1:
-            return 1
-        return gap
-    
-    def sorting(self):
-        length = len(self.data)
-
-        gap = length
-        swapped = True
-
-        while gap != 1 or swapped == True:
-            gap = self.calcGap(gap)
-
-            swapped = False
-            for i in range(0,length-gap):
-                self.update([c_turquoise if x == i or x==i+gap else c_light_blue for x in range(length)])
-                if self.data[i] > self.data[i+gap]:
-                    self.update([c_orange if x == i or x==i+gap else c_light_blue for x in range(length)])
-                    self.data[i],self.data[i+gap] = self.data[i+gap],self.data[i]
-                    self.update([c_green if x == i or x==i+gap else c_light_blue for x in range(length)])
-                    swapped = True
-                self.update([c_green if x == i or x==i+gap else c_light_blue for x in range(length)])
-        
-        self.check()
 
 if __name__ == "__main__":
 
