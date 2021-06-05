@@ -42,7 +42,8 @@ Celem mojego projektu jest stworzenie aplikacji do wizualizacji algorytmów sort
         - wizualizacja:
             - merge sort,
             - heap sort,
-            - quick sort
+            - quick sort,
+            - tim sort,
     - [x] Poprawienie błędów które będą się pojawiać,
        
 - [ ] 13.05-03.06

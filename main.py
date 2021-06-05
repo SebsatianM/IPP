@@ -22,6 +22,7 @@ alghoritms_dict = {'Bubble Sort':alghoritms_base.bubble_sort('Bubble Sort'),
                     'Heap Sort':alghoritms_base.heap_sort('Heap Sort'),
                     'Quick Sort':alghoritms_base.quick_sort('Quick Sort'),
                     'Tim Sort':alghoritms_base.tim_sort('Tim Sort'),
+                    'Comb Sort':alghoritms_base.comb_sort('Comb Sort'),
                     }
 
 #Reading and filtering data from file 
@@ -124,7 +125,7 @@ def start():
     try:
         obj.add_data(data,data_to_low,data_to_high)
     except:
-        print("dupa") 
+        print("Coś poszło nie tak :<") 
     obj.sorting()
     
     
