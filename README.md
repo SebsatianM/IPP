@@ -45,7 +45,7 @@ Celem mojego projektu jest stworzenie aplikacji do wizualizacji algorytmów sort
             - quick sort,
             - tim sort,
     - [x] Poprawienie błędów które będą się pojawiać,
-       
+
 - [ ] 13.05-03.06
     - [ ] Stworzenie dodatkowych wizualizacji jak całkowanie lub szykanie miejsc zerowych funkcji,  
     - [ ] Poprawienie błędów które będą się pojawiać,

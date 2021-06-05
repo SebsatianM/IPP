@@ -20,8 +20,8 @@ def show_main_bar():
     btn_frame = Frame(root_frame,bg=c_dark_grey)
 
     s_btn = Button(btn_frame,text="Sortowanie",bg =c_grey,fg=c_black,width= 5,command=show_sorting_options) 
-    i_btn = Button(btn_frame,text="Całkowanie",bg =c_grey,fg=c_black, width= 1,command=show_integration_options)
-    r_btn = Button(btn_frame,text="Miejsca zerowe",bg =c_grey,fg=c_black,width= 5,command=show_sorting_options)
+    i_btn = Button(btn_frame,text="Pathfinding",bg =c_grey,fg=c_black, width= 1,command=show_integration_options)
+    r_btn = Button(btn_frame,text="Informacje o algorytmach",bg =c_grey,fg=c_black,width= 5,command=show_sorting_options)
 
     s_btn.grid(row=0,column=0,padx=(5,30),pady=5,sticky="nsew")
     i_btn.grid(row=0,column=1,padx=(50,50),pady=5,sticky="nsew")
@@ -86,7 +86,7 @@ def show_sorting_options():
         foreground=c_black,  
         background=c_grey,
         from_=0,
-        to= 80,
+        to= 120,
         orient = HORIZONTAL, 
         resolution=1)
 

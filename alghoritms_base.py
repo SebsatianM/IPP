@@ -202,7 +202,7 @@ class heap_sort(Algorithm):
 
 class quick_sort(Algorithm):
     def __init__(self,name):
-        super().__init__("Quick Sort")
+        super().__init__(name)
 
     def sorting(self):
         self.QuickSort(0,len(self.data)-1)
@@ -241,14 +241,7 @@ class tim_sort(Algorithm):
         self.MIN_MERGE = 32
  
     def calcMinRun(self):
-        """Returns the minimum length of a
-        run from 23 - 64 so that
-        the len(array)/minrun is less than or
-        equal to a power of 2.
-    
-        e.g. 1=>1, ..., 63=>63, 64=>32, 65=>33,
-        ..., 127=>64, 128=>32, ...
-        """
+
         n = len(self.data)
         r = 0
         while n >= self.MIN_MERGE:
@@ -256,7 +249,6 @@ class tim_sort(Algorithm):
             n >>= 1
         return n + r
         
-
     def insertion_sort_for_timsort(self,left=0,right=None):
 
         if right is None:
@@ -324,6 +316,38 @@ class tim_sort(Algorithm):
        
             size *= 2
         self.update([c_light_blue for x in range(len(self.data))])
+
+class comb_sort(Algorithm):
+    def ___init__(self,name):
+        super().__init__(name)
+
+    def calcGap(self,gap):
+        gap = (gap * 10)//13
+        if gap < 1:
+            return 1
+        return gap
+    
+    def sorting(self):
+        length = len(self.data)
+
+        gap = length
+        swapped = True
+
+        while gap != 1 or swapped == True:
+            gap = self.calcGap(gap)
+
+            swapped = False
+            for i in range(0,length-gap):
+                self.update([c_turquoise if x == i or x==i+gap else c_light_blue for x in range(length)])
+                if self.data[i] > self.data[i+gap]:
+                    self.update([c_orange if x == i or x==i+gap else c_light_blue for x in range(length)])
+                    self.data[i],self.data[i+gap] = self.data[i+gap],self.data[i]
+                    self.update([c_green if x == i or x==i+gap else c_light_blue for x in range(length)])
+                    swapped = True
+                self.update([c_green if x == i or x==i+gap else c_light_blue for x in range(length)])
+        
+        self.check()
+
 if __name__ == "__main__":
 
     meh = tim_sort("")
