@@ -182,9 +182,9 @@ class heap_sort(Algorithm):
             if self.data[-1] != max(self.data):
                 sorted_idx = len(self.data)+1
 
-            self.update([c_red if x == i else c_orange if x ==largest else c_green if x>= sorted_idx else c_turquoise for x in range(len(self.data))])
+            self.update([c_red if x == i else c_orange if x == largest else c_green if x == sorted_idx else c_turquoise if x < sorted_idx else c_light_blue for x in range(len(self.data))])
             self.data[i], self.data[largest] = self.data[largest], self.data[i]
-            self.update([c_red if x == i else c_orange if x == largest else c_green if x>= sorted_idx else c_turquoise for x in range(len(self.data))])
+            self.update([c_red if x == i else c_orange if x == largest else c_green if x== sorted_idx else c_turquoise if x < sorted_idx else c_light_blue for x in range(len(self.data))])
             self.heapify(n, largest,sorted_idx)
 
     def sorting(self):
@@ -195,7 +195,7 @@ class heap_sort(Algorithm):
         for i in range(n-1,0,-1):
             self.data[i], self.data[0] = self.data[0], self.data[i]
             self.heapify(i, 0, i)
-            self.update([c_green if x >= i else c_turquoise for x in range(len(self.data))])
+            self.update([c_light_blue if x >= i else c_turquoise for x in range(len(self.data))])
 
         self.check()
 
@@ -354,6 +354,47 @@ class comb_sort(Algorithm):
                     swapped = True
                 self.update([c_green if x == i or x==i+gap else c_light_blue for x in range(length)])
         
+        self.check()
+
+
+class coctail_sort(Algorithm):
+    def __init__(self, name):
+        super().__init__(name)
+
+    def sorting(self):
+        length = len(self.data)
+        swapped = True
+        start = 0
+        end = length-1
+        while (swapped==True):
+    
+            swapped = False
+    
+
+            for i in range (start, end):
+                self.update([c_turquoise if x == i or x==i+1 else c_light_blue for x in range(length)])
+                if (self.data[i] > self.data[i+1]):
+                    self.update([c_orange if x == i or x==i+1 else c_light_blue for x in range(length)])
+                    self.data[i], self.data[i+1] = self.data[i+1], self.data[i]
+                    self.update([c_green if x == i or x==i+1 else c_light_blue for x in range(length)])
+                    swapped=True
+    
+            if (swapped==False):
+                break
+    
+            swapped = False
+    
+            end = end-1
+    
+            for i in range(end-1, start-1,-1):
+                self.update([c_turquoise if x == i or x==i+1 else c_light_blue for x in range(length)])
+                if (self.data[i] > self.data[i+1]):
+                    self.update([c_orange if x == i or x==i+1 else c_light_blue for x in range(length)])
+                    self.data[i], self.data[i+1] = self.data[i+1], self.data[i]
+                    self.update([c_green if x == i or x==i+1 else c_light_blue for x in range(length)])
+                    swapped = True
+    
+            start = start+1
         self.check()
 if __name__ == "__main__":
 
