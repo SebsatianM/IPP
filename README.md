@@ -46,6 +46,7 @@ Celem mojego projektu jest stworzenie aplikacji do wizualizacji algorytmów sort
     - [x] Poprawienie błędów które będą się pojawiać,
        
 - [x] 13.05-03.06
+
     Ze względu na ilość czasu poświęconą na research oraz próby zaimplementowania pierwotnych właściwości w tym raporcie udało mi się jedynie dodać 2 algorytmy.
     - [ ] Stworzenie dodatkowych wizualizacji jak całkowanie lub szykanie miejsc zerowych funkcji,
         Zmiaana koncepcji tych właściwości spowodowana złym doborem początkowych technologii przez co implementacja takich właściwości byłaby bardzo zawiła i czasochłonna.
