@@ -23,6 +23,7 @@ alghoritms_dict = {'Bubble Sort':alghoritms_base.bubble_sort('Bubble Sort'),
                     'Quick Sort':alghoritms_base.quick_sort('Quick Sort'),
                     'Tim Sort':alghoritms_base.tim_sort('Tim Sort'),
                     'Comb Sort':alghoritms_base.comb_sort('Comb Sort'),
+                    'Coctail Shaker Sort':alghoritms_base.coctail_sort('Coctail Sort'),
                     }
 
 #Reading and filtering data from file 
