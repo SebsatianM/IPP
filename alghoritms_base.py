@@ -1,3 +1,4 @@
+  
 import main
 import time
 from colors import *
@@ -316,11 +317,7 @@ class tim_sort(Algorithm):
        
             size *= 2
         self.update([c_light_blue for x in range(len(self.data))])
-<<<<<<< HEAD
 
-
-=======
-        
 class comb_sort(Algorithm):
     def ___init__(self,name):
         super().__init__(name)
@@ -392,7 +389,6 @@ class coctail_sort(Algorithm):
     
             start = start+1
         self.check()
->>>>>>> fourth_raport
 if __name__ == "__main__":
 
     meh = tim_sort("")
@@ -403,5 +399,3 @@ if __name__ == "__main__":
     meh.print_values()
     meh.sorting()
     meh.print_values()
-
-
