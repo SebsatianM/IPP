@@ -35,7 +35,6 @@ Celem mojego projektu jest stworzenie aplikacji do wizualizacji algorytmów sort
             - bubble sort,
             - selection sort,
             - insertion sort,
-
     - [x] Poprawienie błędów które będą się pojawiać,
 - [x] 22.04-13.05
     - [x] Implementacja kolejnych algorytmów,
@@ -46,9 +45,16 @@ Celem mojego projektu jest stworzenie aplikacji do wizualizacji algorytmów sort
             - tim sort,
     - [x] Poprawienie błędów które będą się pojawiać,
        
-- [ ] 13.05-03.06
-    - [ ] Stworzenie dodatkowych wizualizacji jak całkowanie lub szykanie miejsc zerowych funkcji,  
-    - [ ] Poprawienie błędów które będą się pojawiać,
+- [x] 13.05-03.06
+    Ze względu na ilość czasu poświęconą na research oraz próby zaimplementowania pierwotnych właściwości w tym raporcie udało mi się jedynie dodać 2 algorytmy.
+    - [ ] Stworzenie dodatkowych wizualizacji jak całkowanie lub szykanie miejsc zerowych funkcji,
+        Zmiaana koncepcji tych właściwości spowodowana złym doborem początkowych technologii przez co implementacja takich właściwości byłaby bardzo zawiła i czasochłonna.
+    - [x] Implementacja kolejnych algorytmów,
+        - wizualizacja:
+            - comb sort,
+            - coctail shaker sort,
+    - [x] Poprawienie błędów które będą się pojawiać,
+
 - [ ] 03.06-16.06
     - [ ] Dokończenie projektu,
     - [ ] Stworzenie raportu z projektu,
