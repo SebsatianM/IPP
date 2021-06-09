@@ -57,7 +57,9 @@ Celem mojego projektu jest stworzenie aplikacji do wizualizacji algorytmów sort
     - [x] Poprawienie błędów które będą się pojawiać,
 
 - [ ] 03.06-16.06
-    - [ ] Dokończenie projektu,
+    - [x] Dokończenie projektu,
+        - Stowrzenie zakładki z opisami algorytmów,
+        - Dodanie opisów do wszystkich algorytmów
     - [ ] Stworzenie raportu z projektu,
 - [ ] 17.06
     - [ ] Prezentacja projektu,
