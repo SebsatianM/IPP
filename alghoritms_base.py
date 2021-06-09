@@ -1,6 +1,5 @@
   
 import main
-import time
 from colors import *
 from random import shuffle
 class Algorithm:
@@ -34,7 +33,9 @@ class Algorithm:
         else:
             main.Draw_data(self.data,[c_red for x in range(len(self.data))])
 
-        
+    def show_info(self):
+        pass
+
 class bubble_sort(Algorithm):
     def __init__(self,name):
         super().__init__('Bubble Sort')
