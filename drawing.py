@@ -139,12 +139,11 @@ def show_sorting_options():
     
     ui_frame.pack(fill="both",expand=True)
 
-def changed_alghorithm(event):
-    print(type_combobox2.get())
+
 
 #Function that show options frame with setting to integrate visualization part of program
 def show_sorting_info():
-    global type_combobox2
+    global type_combobox2,Best_time_label_Text,Avg_time_label_Text,Worst_time_label_Text,Space_label_Text,Description_label_Text
     f_col_pad_x= 5  #setting up size of gaps between buttons and sliders horizontally 
     pad_y = 3    #setting up size of gaps between buttons and sliders vertically 
 
@@ -176,8 +175,10 @@ def show_sorting_info():
         text="Najlepsza:",
         foreground=c_black,  
         background=c_grey).grid(row=3, column=0, padx=(5,f_col_pad_x), pady=(pad_y,0), sticky="new")
-        
-    Best_time_comp = Label(ui_frame,text="",
+
+    Best_time_label_Text = StringVar(value="")
+
+    Label(ui_frame,textvariable=Best_time_label_Text,
         foreground=c_black,  
         background=c_white).grid(row=4,column=0, padx=(5,f_col_pad_x),pady=(0,pad_y), sticky="new")
 
@@ -186,7 +187,9 @@ def show_sorting_info():
         foreground=c_black,  
         background=c_grey).grid(row=5, column=0, padx=(5,f_col_pad_x), pady=(pad_y,0), sticky="new")
 
-    Avarage_time_comp = Label(ui_frame,text="",
+    Avg_time_label_Text = StringVar(value="")
+
+    Label(ui_frame,textvariable=Avg_time_label_Text,
         foreground=c_black,  
         background=c_white).grid(row=6,column=0, padx=(5,f_col_pad_x),pady=(0,pad_y), sticky="new")
 
@@ -195,7 +198,9 @@ def show_sorting_info():
         foreground=c_black,  
         background=c_grey).grid(row=7, column=0, padx=(5,f_col_pad_x), pady=(pad_y,0), sticky="nesw")
 
-    Worst_time_comp = Label(ui_frame,text="",
+    Worst_time_label_Text = StringVar(value="")
+
+    Label(ui_frame,textvariable=Worst_time_label_Text,
         foreground=c_black,  
         background=c_white).grid(row=8,column=0, padx=(5,f_col_pad_x),pady=(0,pad_y), sticky="new")
 
@@ -204,7 +209,9 @@ def show_sorting_info():
         foreground=c_black,  
         background=c_grey).grid(row=9, column=0, padx=(5,f_col_pad_x), pady=(pad_y*5,0), sticky="new")
 
-    Space_comp = Label(ui_frame,text="",
+    Space_label_Text = StringVar(value="")
+
+    Label(ui_frame,textvariable=Space_label_Text,
         foreground=c_black,  
         background=c_white).grid(row=10,column=0, padx=(5,f_col_pad_x),pady=(0,pad_y), sticky="new")
 
@@ -213,9 +220,12 @@ def show_sorting_info():
         foreground=c_black,  
         background=c_grey).grid(row=0, column=1, columnspan=6, padx=(f_col_pad_x*2,f_col_pad_x), pady=(pad_y*5,0), sticky="new")
 
-    description = Label(ui_frame,text="",
+    Description_label_Text = StringVar(value="")
+
+    Label(ui_frame,textvariable=Description_label_Text,
         foreground=c_black,  
-        background=c_white).grid(row=1,column=1, columnspan=6,rowspan=10, padx=(f_col_pad_x*2,f_col_pad_x),pady=(0,pad_y), sticky="nesw")
+        background=c_white,wraplength=300, justify="center",
+        font="helvetica 11").grid(row=1,column=1, columnspan=6,rowspan=10, padx=(f_col_pad_x*2,f_col_pad_x),pady=(0,pad_y), sticky="nesw")
 
     ui_frame.grid_columnconfigure(0,weight=1)
     ui_frame.grid_columnconfigure(1,weight=1)
@@ -224,3 +234,19 @@ def show_sorting_info():
 
         
     ui_frame.pack(fill="both",expand=True)
+
+def changed_alghorithm(event):
+    alghoritm_type = type_combobox2.get()
+
+    for key,value in main.alghoritms_dict.items():
+        if key == alghoritm_type:
+            information = value.show_info()
+
+    
+    Best_time_label_Text.set(information[0])
+    Avg_time_label_Text.set(information[1])
+    Worst_time_label_Text.set(information[2])
+    Space_label_Text.set(information[3])
+    Description_label_Text.set(information[4])
+
+    

@@ -3,8 +3,14 @@ import main
 from colors import *
 from random import shuffle
 class Algorithm:
-    def __init__(self, name):
-         self.name = name
+    def __init__(self,name,best_time_con ="Brak informacji",avg_time_con="Brak informacji",worst_time_con="Brak informacji",space_con="Brak informacji",desc="Brak informacji"):
+        
+        self.name = name
+        self.best_time_con = best_time_con
+        self.avg_time_con = avg_time_con
+        self.worst_time_con = worst_time_con
+        self.space_con = space_con
+        self.desc = desc
 
     def add_data(self,data,data_to_low=None,data_to_high=None):
         self.data = data
@@ -34,11 +40,11 @@ class Algorithm:
             main.Draw_data(self.data,[c_red for x in range(len(self.data))])
 
     def show_info(self):
-        pass
+        return self.best_time_con,self.avg_time_con,self.worst_time_con,self.space_con,self.desc
 
 class bubble_sort(Algorithm):
     def __init__(self,name):
-        super().__init__('Bubble Sort')
+        super().__init__(name,"O(n)","O(n"+u'\u00b2'+")","O(n"+u'\u00b2'+")","O(1)","Polega na porównywaniu dwóch kolejnych elementów i zamianie ich kolejności, jeżeli zaburza ona porządek, w jakim się sortuje tablicę. Sortowanie kończy się, gdy podczas kolejnego przejścia nie dokonano żadnej zmiany.")
 
     def sorting(self):
         n = len(self.data)
@@ -51,10 +57,10 @@ class bubble_sort(Algorithm):
                     self.update([c_green if x == j else c_turquoise if x==j+1 else c_light_blue for x in range(n)])         
         self.check()
 
-
 class selection_sort(Algorithm):
     def __init__(self,name):
-        super().__init__('Selection Sort')
+        super().__init__(name,"O(n"+u'\u00b2'+")","O(n"+u'\u00b2'+")","O(n"+u'\u00b2'+")","O(1)","Polega na wyszukaniu elementu mającego się znaleźć na żądanej pozycji i zamianie miejscami z tym, który jest tam obecnie." \
+            " Operacja jest wykonywana dla wszystkich indeksów sortowanej tablicy.\n\nAlgorytm przedstawia się następująco:\n1. wyszukaj minimalną wartość z tablicy spośród elementów od i do końca tablicy\n2. zamień wartość minimalną, z elementem na pozycji i")
 
     def sorting(self):
         n = len(self.data)
@@ -71,10 +77,10 @@ class selection_sort(Algorithm):
 
         self.check()
 
-
 class insertion_sort(Algorithm):
-    def __init_(self,name):
-        super().__init__('Insertion Sort')
+    def __init__(self,name):
+        super().__init__(name,"O(n)","O(n"+u'\u00b2'+")","O(n"+u'\u00b2'+")","O(1)","Jeden z najprostszych algorytmów sortowania, którego zasada działania odzwierciedla sposób w jaki ludzie ustawiają karty – kolejne elementy wejściowe są ustawiane na odpowiednie miejsca docelowe."\
+            "Jest efektywny dla niewielkiej liczby elementów. Pomimo tego, że jest znacznie mniej wydajny od algorytmów takich jak quicksort czy heapsort, posiada pewne zalety.")
 
     def sorting(self):
         n = len(self.data)
@@ -92,7 +98,10 @@ class insertion_sort(Algorithm):
 
 class merge_sort(Algorithm):
     def __init__(self,name):
-        super().__init__('Merge Sort')   
+        super().__init__(name,"O(nlog(n))","O(nlog(n))","O(nlog(n))","O(n)","Rekurencyjny algorytm sortowania danych, stosujący metodę dziel i zwyciężaj. Odkrycie algorytmu przypisuje się Johnowi von Neumannowi.\nWyróżnić można trzy podstawowe kroki:"\
+        "\n1.Podział zestawu danych na dwie równe części." \
+        "\n2.Zastosowanie sortowania przez scalanie dla każdej z nich oddzielnie, chyba że pozostał już tylko jeden element."\
+        "\n3.Połączenie posortowanych podciągów w jeden posortowany ciąg.")   
 
     def sorting(self):
         self.alg(0,len(self.data)-1)
@@ -165,10 +174,11 @@ class merge_sort(Algorithm):
 
         return colorArray
             
-
 class heap_sort(Algorithm):
-    def __init_(self,name):
-        super().__init__('Heap Sort')
+    def __init__(self,name):
+        super().__init__(name,"O(nlog(n))","O(nlog(n))","O(nlog(n))","O(1)","Jeden z algorytmów sortowania, choć niestabilny, to jednak szybki i niepochłaniający wiele pamięci (jest to algorytm sortowania w miejscu)."\
+            "W praktyce z reguły nieco wolniejszy od sortowania szybkiego, lecz ma lepszą pesymistyczną złożoność czasową (przez co jest odporny np. na atak za pomocą celowo spreparowanych danych, które spowodowałyby "\
+            "jego znacznie wolniejsze działanie).")
 
     def heapify(self, n, i,sorted_idx):
 
@@ -201,10 +211,11 @@ class heap_sort(Algorithm):
 
         self.check()
 
-
 class quick_sort(Algorithm):
     def __init__(self,name):
-        super().__init__(name)
+        super().__init__(name,"O(nlog(n))","O(nlog(n))","O(n"+u'\u00b2'+")","O(n)","Jeden z popularnych algorytmów sortowania działających na zasadzie „dziel i zwyciężaj”."\
+        " Sortowanie szybkie (ang. QuickSort) zostało wynalezione w 1962 przez C.A.R. Hoare’a."\
+        " Ze względu na szybkość i prostotę implementacji jest powszechnie używany. Jego implementacje znajdują się w bibliotekach standardowych wielu środowisk programowania.")
 
     def sorting(self):
         self.QuickSort(0,len(self.data)-1)
@@ -235,10 +246,11 @@ class quick_sort(Algorithm):
         
         return i+1
 
-
 class tim_sort(Algorithm):
     def __init__(self,name):
-        super().__init__("Tim Sort")
+        super().__init__(name,"O(n)","O(nlog(n))","O(nlog(n))","O(n)","To hybrydowy algorytm sortowania wywodzący się z sortowania przez scalanie i sortowania przez wstawianie. "\
+            "Został zaprojektowany do szybkiej pracy na różnych rzeczywistych danych. Został opracowany w 2002 roku przez Tima Petersa do użytku w Pythonie i jest standardowym algorytmem sortowania w Pythonie od wersji 2.3. "\
+            "Jest teraz używany również w Javie SE 7 i na platformie Android.")
 
         self.MIN_MERGE = 32
  
@@ -320,9 +332,11 @@ class tim_sort(Algorithm):
         self.update([c_light_blue for x in range(len(self.data))])
 
 class comb_sort(Algorithm):
-    def ___init__(self,name):
-        super().__init__(name)
-
+    def __init__(self, name):
+        super().__init__(name,"O(nlog(n))","O(n"+u'\u00b2'+"/p"+u'\u00b2'+")","O(n"+u'\u00b2'+")","O(1)","Oparte jest na sortowaniu bąbelkowym. Za rozpiętość (p) przymuje się wielkość tablicy, którą dzięli się przez 1.3 i odrzuca część ułamkową. "\
+            "Następnie bada się kolejno wszystkie pary obiektów odległych o rozpiętość. Gdy rozpiętość osiągnie wartość 1 sortowanie zostanie zakończone. Do sprawdzenia czy zaszła zmiana podczas sortowania,"\
+            " można użyć dodatkowej zmiennej typu bool, jak w przypadku sortowania bąbelkowego. Przerywane jest wykonywanie algorytmu, gdy podczas przejścia przez całą tablicę nie nastąpiła żadna zamiana.")
+            
     def calcGap(self,gap):
         gap = (gap * 10)//13
         if gap < 1:
@@ -353,7 +367,8 @@ class comb_sort(Algorithm):
 
 class coctail_sort(Algorithm):
     def __init__(self, name):
-        super().__init__(name)
+        super().__init__(name,"O(n)","O(n"+u'\u00b2'+")","O(n"+u'\u00b2'+")","O(1)","Znane także jako dwukierunkowe sortowanie bąbelkowe i sortowanie przez wstrząsanie – odmiana sortowania bąbelkowego, "\
+            "które jest stabilnym algorytmem sortowania sortującym za pomocą porównań. Algorytm w przeciwieństwie do sortowania bąbelkowego sortuje liczby w zbiorze w dwóch kierunkach.")
 
     def sorting(self):
         length = len(self.data)
