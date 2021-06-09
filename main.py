@@ -85,6 +85,10 @@ def Draw_data(data, colorArray,f_call_counter=[0]):
         drawing.canvas.create_rectangle(x0, y0, x1, y1, fill=colorArray[i])
     drawing.canvas.update()
 
+def Draw_information(name,time_complexity,space_complexity):
+
+    pass
+
 #Generating random numbers depends on user choice
 def generate_data():
     global data
