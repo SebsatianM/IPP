@@ -8,7 +8,7 @@ root = Tk()
 root.title('Sorting Algorithms Visualizer')
 
 root.maxsize(1920,1080)
-root.minsize(600,500)
+root.minsize(600,400)
 #Function that create upper frame with 3 buttons
 def init():
     global root_frame
@@ -20,12 +20,10 @@ def show_main_bar():
     btn_frame = Frame(root_frame,bg=c_dark_grey)
 
     s_btn = Button(btn_frame,text="Sortowanie",bg =c_grey,fg=c_black,width= 5,command=show_sorting_options) 
-    i_btn = Button(btn_frame,text="Pathfinding",bg =c_grey,fg=c_black, width= 1,command=show_integration_options)
-    r_btn = Button(btn_frame,text="Informacje o algorytmach",bg =c_grey,fg=c_black,width= 5,command=show_sorting_options)
+    r_btn = Button(btn_frame,text="Informacje o algorytmach",bg =c_grey,fg=c_black,width= 5,command=show_sorting_info)
 
-    s_btn.grid(row=0,column=0,padx=(5,30),pady=5,sticky="nsew")
-    i_btn.grid(row=0,column=1,padx=(50,50),pady=5,sticky="nsew")
-    r_btn.grid(row=0,column=2,padx=(30,5),pady=5,sticky="nsew")
+    s_btn.grid(row=0,column=0,padx=(30,5),pady=5,sticky="nsew")
+    r_btn.grid(row=0,column=2,padx=(5,30),pady=5,sticky="nsew")
     
     btn_frame.grid_columnconfigure(0,weight=1)
     btn_frame.grid_columnconfigure(1,weight=1)
@@ -142,18 +140,113 @@ def show_sorting_options():
     ui_frame.pack(fill="both",expand=True)
 
 
+
 #Function that show options frame with setting to integrate visualization part of program
-def show_integration_options():
+def show_sorting_info():
+    global type_combobox2,Best_time_label_Text,Avg_time_label_Text,Worst_time_label_Text,Space_label_Text,Description_label_Text
+    f_col_pad_x= 5  #setting up size of gaps between buttons and sliders horizontally 
+    pad_y = 3    #setting up size of gaps between buttons and sliders vertically 
+
     destroy_frame()
     ui_frame = Frame(root_frame,bg=c_dark_grey)
+    root_frame.configure(background=c_dark_grey)
+
+    
     Label(ui_frame,
-        text="Wybierz całkę:",
+        text="Wybierz algorytm:",
         foreground=c_black,  
-        background=c_grey,  
-    ).grid(row=2, column=0, padx=5, pady=5, sticky=W)
+        background=c_grey).grid(row=0, column=0, padx=(5,f_col_pad_x), pady=0, sticky="sew")
+
+    type_combobox2 = ttk.Combobox(ui_frame,
+        foreground=c_black,  
+        background=c_grey,
+        values=[x for x in list(main.alghoritms_dict.keys())],
+        height=20,state="readonly")
+    type_combobox2.current(0)
+    type_combobox2.grid(row=1,column=0,padx=(5,f_col_pad_x),pady=(pad_y,0), sticky="new")
+    type_combobox2.bind('<<ComboboxSelected>>', changed_alghorithm)  
+
     Label(ui_frame,
-        text="Wybierz metodę:",
+        text="Złożoność czasowa:",
         foreground=c_black,  
-        background=c_grey).grid(row=3, column=0, padx=5, pady=5, sticky=W)
+        background=c_grey).grid(row=2, column=0, padx=(5,f_col_pad_x), pady=(pad_y*5,0), sticky="new")
+
+    Label(ui_frame,
+        text="Najlepsza:",
+        foreground=c_black,  
+        background=c_grey).grid(row=3, column=0, padx=(5,f_col_pad_x), pady=(pad_y,0), sticky="new")
+
+    Best_time_label_Text = StringVar(value="")
+
+    Label(ui_frame,textvariable=Best_time_label_Text,
+        foreground=c_black,  
+        background=c_white).grid(row=4,column=0, padx=(5,f_col_pad_x),pady=(0,pad_y), sticky="new")
+
+    Label(ui_frame,
+        text="Średnia:",
+        foreground=c_black,  
+        background=c_grey).grid(row=5, column=0, padx=(5,f_col_pad_x), pady=(pad_y,0), sticky="new")
+
+    Avg_time_label_Text = StringVar(value="")
+
+    Label(ui_frame,textvariable=Avg_time_label_Text,
+        foreground=c_black,  
+        background=c_white).grid(row=6,column=0, padx=(5,f_col_pad_x),pady=(0,pad_y), sticky="new")
+
+    Label(ui_frame,
+        text="Najgorsza:",
+        foreground=c_black,  
+        background=c_grey).grid(row=7, column=0, padx=(5,f_col_pad_x), pady=(pad_y,0), sticky="nesw")
+
+    Worst_time_label_Text = StringVar(value="")
+
+    Label(ui_frame,textvariable=Worst_time_label_Text,
+        foreground=c_black,  
+        background=c_white).grid(row=8,column=0, padx=(5,f_col_pad_x),pady=(0,pad_y), sticky="new")
+
+    Label(ui_frame,
+        text="Złożoność pamięciowa:",
+        foreground=c_black,  
+        background=c_grey).grid(row=9, column=0, padx=(5,f_col_pad_x), pady=(pad_y*5,0), sticky="new")
+
+    Space_label_Text = StringVar(value="")
+
+    Label(ui_frame,textvariable=Space_label_Text,
+        foreground=c_black,  
+        background=c_white).grid(row=10,column=0, padx=(5,f_col_pad_x),pady=(0,pad_y), sticky="new")
+
+    Label(ui_frame,
+        text="Opis algorytmu:",
+        foreground=c_black,  
+        background=c_grey).grid(row=0, column=1, columnspan=6, padx=(f_col_pad_x*2,f_col_pad_x), pady=(pad_y*5,0), sticky="new")
+
+    Description_label_Text = StringVar(value="")
+
+    Label(ui_frame,textvariable=Description_label_Text,
+        foreground=c_black,  
+        background=c_white,wraplength=300, justify="center",
+        font="helvetica 11").grid(row=1,column=1, columnspan=6,rowspan=10, padx=(f_col_pad_x*2,f_col_pad_x),pady=(0,pad_y), sticky="nesw")
+
+    ui_frame.grid_columnconfigure(0,weight=1)
+    ui_frame.grid_columnconfigure(1,weight=1)
+    ui_frame.grid_columnconfigure(2,weight=1)
+    ui_frame.grid_columnconfigure(3,weight=1)
+
         
-    ui_frame.pack(fill="both")
+    ui_frame.pack(fill="both",expand=True)
+
+def changed_alghorithm(event):
+    alghoritm_type = type_combobox2.get()
+
+    for key,value in main.alghoritms_dict.items():
+        if key == alghoritm_type:
+            information = value.show_info()
+
+    
+    Best_time_label_Text.set(information[0])
+    Avg_time_label_Text.set(information[1])
+    Worst_time_label_Text.set(information[2])
+    Space_label_Text.set(information[3])
+    Description_label_Text.set(information[4])
+
+    

@@ -23,7 +23,7 @@ alghoritms_dict = {'Bubble Sort':alghoritms_base.bubble_sort('Bubble Sort'),
                     'Quick Sort':alghoritms_base.quick_sort('Quick Sort'),
                     'Tim Sort':alghoritms_base.tim_sort('Tim Sort'),
                     'Comb Sort':alghoritms_base.comb_sort('Comb Sort'),
-                    'Coctail Shaker Sort':alghoritms_base.coctail_sort('Coctail Sort'),
+                    'Coctail Shaker Sort':alghoritms_base.coctail_sort('Coctail Shaker Sort'),
                     }
 
 #Reading and filtering data from file 
@@ -84,6 +84,10 @@ def Draw_data(data, colorArray,f_call_counter=[0]):
         y1 = height_stack[0]
         drawing.canvas.create_rectangle(x0, y0, x1, y1, fill=colorArray[i])
     drawing.canvas.update()
+
+def Draw_information(name,time_complexity,space_complexity):
+
+    pass
 
 #Generating random numbers depends on user choice
 def generate_data():

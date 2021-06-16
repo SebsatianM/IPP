@@ -56,8 +56,10 @@ Celem mojego projektu jest stworzenie aplikacji do wizualizacji algorytmów sort
             - coctail shaker sort,
     - [x] Poprawienie błędów które będą się pojawiać,
 
-- [ ] 03.06-16.06
-    - [ ] Dokończenie projektu,
-    - [ ] Stworzenie raportu z projektu,
+- [x] 03.06-16.06
+    - [x] Dokończenie projektu,
+        - Stowrzenie zakładki z opisami algorytmów,
+        - Dodanie opisów do wszystkich algorytmów
+    - [x] Stworzenie raportu z projektu,
 - [ ] 17.06
     - [ ] Prezentacja projektu,
