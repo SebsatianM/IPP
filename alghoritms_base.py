@@ -2,6 +2,7 @@
 import main
 from colors import *
 from random import shuffle
+
 class Algorithm:
     def __init__(self,name,best_time_con ="Brak informacji",avg_time_con="Brak informacji",worst_time_con="Brak informacji",space_con="Brak informacji",desc="Brak informacji"):
         
@@ -17,12 +18,6 @@ class Algorithm:
         self.data_to_low = data_to_low
         self.data_to_high = data_to_high
     
-    def print_values(self): 
-        print(self.name)
-        print(self.data)
-        print(self.data_to_low)
-        print(self.data_to_high)
-
     def update(self,colorArray,swap1=None,swap2=None):
         main.Draw_data(self.data,colorArray)
         
@@ -330,7 +325,8 @@ class tim_sort(Algorithm):
        
             size *= 2
         self.update([c_light_blue for x in range(len(self.data))])
-
+        self.check()
+        
 class comb_sort(Algorithm):
     def __init__(self, name):
         super().__init__(name,"O(nlog(n))","O(n"+u'\u00b2'+"/p"+u'\u00b2'+")","O(n"+u'\u00b2'+")","O(1)","Oparte jest na sortowaniu bąbelkowym. Za rozpiętość (p) przymuje się wielkość tablicy, którą dzięli się przez 1.3 i odrzuca część ułamkową. "\
@@ -407,11 +403,7 @@ class coctail_sort(Algorithm):
         self.check()
 if __name__ == "__main__":
 
-    meh = tim_sort("")
+
     data =[x for x in range(0,128)]
     shuffle(data)
-    meh.add_data(data)
-    
-    meh.print_values()
-    meh.sorting()
-    meh.print_values()
+   
