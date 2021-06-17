@@ -37,7 +37,6 @@ def destroy_frame():
     if len(widget)>1:
         widget[1].destroy()
 
-
 #Function that show options frame with setting to sorting visualization part of program
 def show_sorting_options():
     global type_combobox,speed_scale,size_scale,min_val_scale,max_val_scale,canvas,ui_frame
@@ -139,8 +138,6 @@ def show_sorting_options():
     
     ui_frame.pack(fill="both",expand=True)
 
-
-
 #Function that show options frame with setting to integrate visualization part of program
 def show_sorting_info():
     global type_combobox2,Best_time_label_Text,Avg_time_label_Text,Worst_time_label_Text,Space_label_Text,Description_label_Text
@@ -235,6 +232,7 @@ def show_sorting_info():
         
     ui_frame.pack(fill="both",expand=True)
 
+#Function changing information in textareas depends which alghorithm is selected
 def changed_alghorithm(event):
     alghoritm_type = type_combobox2.get()
 
